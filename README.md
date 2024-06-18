@@ -9,7 +9,7 @@ Basics:
 "Visualization-Basics" 
 
 ggplot2: 
-"ggplot2-Exploratory-Data-Analysis"
+"ggplot2-Exploratory-Data-Analysis" \n
 "ggplot2-Bar-Charts"
 "ggplot2-Histograms"
 "ggplot2-Boxplots"
