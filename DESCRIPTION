@@ -1,0 +1,12 @@
+Package: PositPrimers
+Title: Posit Primers for Exploring and Visualizing Data in R
+Version: 1.0
+Authors@R: 
+    person("Lianne", "Siegel", , "siege245@umn.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-9440-9146"))
+Description: This package adapts the primers originally created by Posit for educational use. The package includes modules that primarily encapsulate an introduction to "ggplot2", "dplyr". The code was adapted from that developed by Posit (https://github.com/rstudio-education/primers) though some components may have changed. 
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
