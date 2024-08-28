@@ -720,6 +720,7 @@ library(maps)
 library(mapproj)
 library(gapminder)
 library(forcats)
+library(gradethis)
 
 asia <- 
   gapminder %>% 
@@ -733,15 +734,11 @@ USArrests2 <- USArrests %>%
   rownames_to_column("region") %>% 
   mutate(region = tolower(region))
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(error = TRUE, out.width = "100%")
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::register_http_handlers(session, metadata = list(id = "com.rstudio.primers.06-line-graphs", version = 1))
+learnr:::register_http_handlers(session, metadata = list(version = 1))
 </script>
 
 
@@ -783,18 +780,16 @@ output$`tutorial-exercise-r1-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r1", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r1", code = "", opts = list(label = "\"r1\"", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r1", code = "", opts = list(label = "\"r1\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good Job! The graph shows the number of unemployed people in the US (in thousands) from 1967 to 2015. Now let's look at a more rich dataset.\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good Job! The graph shows the number of unemployed people in the US (in thousands) from 1967 to 2015. Now let's look at a more rich dataset.\")", chunk_opts = list(
         label = "r1-check")), solution = structure(c("ggplot(economics) +", 
     "  geom_line(mapping = aes(x = date, y = unemploy))"), chunk_opts = list(
         label = "r1-solution")), tests = NULL, options = list(
@@ -814,7 +809,8 @@ learnr:::store_exercise_cache(structure(list(label = "r1", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r1", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r1, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -824,21 +820,21 @@ learnr:::store_exercise_cache(structure(list(label = "r1", global_setup = struct
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "r2", question = structure("You’ve encountered whipsawing before in the <a href=\"\">Data Basics tutorial<\u002fa>. What does whipsawing indicate?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_e33568e", 
+"character")), answers = list(structure(list(id = "lnr_ans_ecab291", 
     option = "There is a lot of volatility in the data.", value = "There is a lot of volatility in the data.", 
     label = structure("There is a lot of volatility in the data.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("Highly volatile data could certainly seem to whip back and forth, but look closer: that’s not what is going on here.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_80f070e", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_cc78f73", 
     option = "The graph should be plotted in polar coordinates.", 
     value = "The graph should be plotted in polar coordinates.", 
     label = structure("The graph should be plotted in polar coordinates.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_6b22033", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_e725222", 
     option = "The data contains rounding errors.", value = "The data contains rounding errors.", 
     label = structure("The data contains rounding errors.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d76d043", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_3ac78e5", 
     option = "We are trying to plot more than one line with a single line.", 
     value = "We are trying to plot more than one line with a single line.", 
     label = structure("We are trying to plot more than one line with a single line.", html = TRUE, class = c("html", 
@@ -851,7 +847,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "r2-answer", question = "r2"), loading = NULL, random_answer_order = FALSE, 
-    allow_retry = TRUE, seed = 991669935.038218, options = list()), class = c("learnr_radio", 
+    allow_retry = TRUE, seed = 1704371952.20634, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  
@@ -866,18 +862,16 @@ output$`tutorial-exercise-r3-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r3", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r3", code = "", opts = list(label = "\"r3\"", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r3", code = "", opts = list(label = "\"r3\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! There are actually four lines in the plot. One for each country: China, Japan, North Korea, and South Korea.\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! There are actually four lines in the plot. One for each country: China, Japan, North Korea, and South Korea.\")", chunk_opts = list(
         label = "r3-check")), solution = structure(c("ggplot(asia) +", 
     "  geom_point(mapping = aes(x = year, y = gdpPercap))"), chunk_opts = list(
         label = "r3-solution")), tests = NULL, options = list(
@@ -897,7 +891,8 @@ learnr:::store_exercise_cache(structure(list(label = "r3", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r3", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r3, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -915,18 +910,16 @@ output$`tutorial-exercise-r4-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r4", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r4", code = "ggplot(asia) +\n  geom_line(mapping = aes(x = year, y = gdpPercap))", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r4", code = "ggplot(asia) +\n  geom_line(mapping = aes(x = year, y = gdpPercap))", 
         opts = list(label = "\"r4\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good job! We now have a separate line for each country. Unfortunately, we cannot tell what the countries are: the group aesthetic does not supply a legend. Let's look at how to fix that.\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! We now have a separate line for each country. Unfortunately, we cannot tell what the countries are: the group aesthetic does not supply a legend. Let's look at how to fix that.\")", chunk_opts = list(
         label = "r4-check")), solution = structure(c("ggplot(asia) +", 
     "  geom_line(mapping = aes(x = year, y = gdpPercap, group = country))"
     ), chunk_opts = list(label = "r4-solution")), tests = NULL, 
@@ -947,7 +940,8 @@ learnr:::store_exercise_cache(structure(list(label = "r4", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r4", exercise = TRUE, code = c("ggplot(asia) +", 
         "  geom_line(mapping = aes(x = year, y = gdpPercap))"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r4, exercise = TRUE", 
@@ -966,19 +960,17 @@ output$`tutorial-exercise-r5-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r5", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r5", code = "ggplot(asia) +\n  geom_line(mapping = aes(x = year, y = gdpPercap, color = country))", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r5", code = "ggplot(asia) +\n  geom_line(mapping = aes(x = year, y = gdpPercap, color = country))", 
         opts = list(label = "\"r5\"", exercise = "TRUE", exercise.eval = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! If you map two aesthetics to the same variable, ggplot2 will combine their legends. Supplementing color with linetype is a good idea if you might print your line chart in black and white.\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! If you map two aesthetics to the same variable, ggplot2 will combine their legends. Supplementing color with linetype is a good idea if you might print your line chart in black and white.\")", chunk_opts = list(
         label = "r5-check")), solution = structure(c("ggplot(asia) +", 
     "  geom_line(mapping = aes(x = year, y = gdpPercap, linetype = country, color = country))"
     ), chunk_opts = list(label = "r5-solution")), tests = NULL, 
@@ -999,7 +991,8 @@ learnr:::store_exercise_cache(structure(list(label = "r5", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r5", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(asia) +", "  geom_line(mapping = aes(x = year, y = gdpPercap, color = country))"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r5, exercise = TRUE, exercise.eval = TRUE", 
@@ -1019,18 +1012,16 @@ output$`tutorial-exercise-r6-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r6", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r6", code = "", opts = list(label = "\"r6\"", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r6", code = "", opts = list(label = "\"r6\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! Japan has the highest life expectancy and North Korea the worst, but we can see that things haven't always been this way. Now let's look at some other ways to display the same information.\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! Japan has the highest life expectancy and North Korea the worst, but we can see that things haven't always been this way. Now let's look at some other ways to display the same information.\")", chunk_opts = list(
         label = "r6-check")), solution = structure(c("ggplot(asia) +", 
     "  geom_line(mapping = aes(x = year, y = lifeExp, color = country, linetype = country))"
     ), chunk_opts = list(label = "r6-solution")), tests = NULL, 
@@ -1051,7 +1042,8 @@ learnr:::store_exercise_cache(structure(list(label = "r6", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r6", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r6, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1069,19 +1061,17 @@ output$`tutorial-exercise-r7-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r7", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r7", code = "ggplot(asia) +\n  geom_line(mapping = aes(x = year, y = lifeExp, color = country, linetype = country))", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r7", code = "ggplot(asia) +\n  geom_line(mapping = aes(x = year, y = lifeExp, color = country, linetype = country))", 
         opts = list(label = "\"r7\"", exercise = "TRUE", exercise.eval = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("'Good job! You can control whether the steps move horizontally first and then vertically or vertically first and then horizontally with the parameters `direction = \"hv\"` (the default) or `direction = \"vh\"`.'", chunk_opts = list(
+    check = structure("grade_this_code(correct = 'Good job! You can control whether the steps move horizontally first and then vertically or vertically first and then horizontally with the parameters `direction = \"hv\"` (the default) or `direction = \"vh\"`.')", chunk_opts = list(
         label = "r7-check")), solution = structure(c("ggplot(asia) +", 
     "  geom_step(mapping = aes(x = year, y = lifeExp, color = country, linetype = country))"
     ), chunk_opts = list(label = "r7-solution")), tests = NULL, 
@@ -1102,7 +1092,8 @@ learnr:::store_exercise_cache(structure(list(label = "r7", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r7", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(asia) +", "  geom_line(mapping = aes(x = year, y = lifeExp, color = country, linetype = country))"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r7, exercise = TRUE, exercise.eval = TRUE", 
@@ -1122,19 +1113,17 @@ output$`tutorial-exercise-r0-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r0", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r0", code = "ggplot(economics) +\n  geom_line(mapping = aes(x = date, y = unemploy))", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r0", code = "ggplot(economics) +\n  geom_line(mapping = aes(x = date, y = unemploy))", 
         opts = list(label = "\"r0\"", exercise = "TRUE", exercise.eval = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! Filling the space under the line gives you a new way to customize your plot.\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! Filling the space under the line gives you a new way to customize your plot.\")", chunk_opts = list(
         label = "r0-check")), solution = structure(c("ggplot(economics) +", 
     "  geom_area(mapping = aes(x = date, y = unemploy))"), chunk_opts = list(
         label = "r0-solution")), tests = NULL, options = list(
@@ -1154,7 +1143,8 @@ learnr:::store_exercise_cache(structure(list(label = "r0", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r0", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(economics) +", "  geom_line(mapping = aes(x = date, y = unemploy))"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r0, exercise = TRUE, exercise.eval = TRUE", 
@@ -1174,19 +1164,17 @@ output$`tutorial-exercise-r8-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r8", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r8", code = "ggplot(economics) +\n  geom_area(mapping = aes(x = date, y = unemploy))", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r8", code = "ggplot(economics) +\n  geom_area(mapping = aes(x = date, y = unemploy))", 
         opts = list(label = "\"r8\"", exercise = "TRUE", exercise.eval = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! Remember that you map aesthetics to variables inside of aes(). You set aesthetics to values outside of aes().\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! Remember that you map aesthetics to variables inside of aes(). You set aesthetics to values outside of aes().\")", chunk_opts = list(
         label = "r8-check")), solution = structure(c("ggplot(economics) +", 
     "  geom_area(mapping = aes(x = date, y = unemploy), fill = \"blue\")"
     ), chunk_opts = list(label = "r8-solution")), tests = NULL, 
@@ -1207,7 +1195,8 @@ learnr:::store_exercise_cache(structure(list(label = "r8", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r8", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(economics) +", "  geom_area(mapping = aes(x = date, y = unemploy))"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r8, exercise = TRUE, exercise.eval = TRUE", 
@@ -1227,16 +1216,14 @@ output$`tutorial-exercise-r00-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r00", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r00", code = "ggplot(asia) +\n  geom_area(mapping = aes(x = year, y = lifeExp, fill = country))", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r00", code = "ggplot(asia) +\n  geom_area(mapping = aes(x = year, y = lifeExp, fill = country))", 
         opts = list(label = "\"r00\"", exercise = "TRUE"), engine = "r")), 
     code_check = NULL, error_check = NULL, check = NULL, solution = NULL, 
     tests = NULL, options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -1256,7 +1243,8 @@ learnr:::store_exercise_cache(structure(list(label = "r00", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r00", exercise = TRUE, code = c("ggplot(asia) +", 
         "  geom_area(mapping = aes(x = year, y = lifeExp, fill = country))"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r00, exercise = TRUE", 
@@ -1275,18 +1263,16 @@ output$`tutorial-exercise-r9-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r9", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r9", code = "ggplot(asia) +\n  geom_area(mapping = aes(x = year, y = lifeExp, fill = country), alpha = 0.3)", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r9", code = "ggplot(asia) +\n  geom_area(mapping = aes(x = year, y = lifeExp, fill = country), alpha = 0.3)", 
         opts = list(label = "\"r9\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good Job! You can further customize your graph by switching from `geom_area()` to `geom_ribbon()`. `geom_ribbon()` lets you map the bottom of the filled area to a variable, as well as the top. See `?geom_ribbon` if you'd like to learn more.\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good Job! You can further customize your graph by switching from `geom_area()` to `geom_ribbon()`. `geom_ribbon()` lets you map the bottom of the filled area to a variable, as well as the top. See `?geom_ribbon` if you'd like to learn more.\")", chunk_opts = list(
         label = "r9-check")), solution = structure(c("ggplot(asia) +", 
     "  geom_area(mapping = aes(x = year, y = lifeExp, fill = country), position = \"identity\", alpha = 0.3)"
     ), chunk_opts = list(label = "r9-solution")), tests = NULL, 
@@ -1307,7 +1293,8 @@ learnr:::store_exercise_cache(structure(list(label = "r9", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r9", exercise = TRUE, code = c("ggplot(asia) +", 
         "  geom_area(mapping = aes(x = year, y = lifeExp, fill = country), alpha = 0.3)"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r9, exercise = TRUE", 
@@ -1326,18 +1313,16 @@ output$`tutorial-exercise-r10-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r10", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r10", code = "ggplot(tx) +\n  geom_path(mapping = aes(x = long, y = lat))", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r10", code = "ggplot(tx) +\n  geom_path(mapping = aes(x = long, y = lat))", 
         opts = list(label = "\"r10\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good job! `geom_path()` reveals how you can use what is essentially a line plot to make a map (this is a map of the state of Texas). There are other ways to make maps in R, but this low tech method is surprisingly versatile.\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! `geom_path()` reveals how you can use what is essentially a line plot to make a map (this is a map of the state of Texas). There are other ways to make maps in R, but this low tech method is surprisingly versatile.\")", chunk_opts = list(
         label = "r10-check")), solution = structure(c("ggplot(tx) +", 
     "  geom_path(mapping = aes(x = long, y = lat))"), chunk_opts = list(
         label = "r10-solution")), tests = NULL, options = list(
@@ -1357,7 +1342,8 @@ learnr:::store_exercise_cache(structure(list(label = "r10", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r10", exercise = TRUE, code = c("ggplot(tx) +", 
         "  geom_path(mapping = aes(x = long, y = lat))"), out.width.px = "100%", 
         out.height.px = 384, params.src = "r10, exercise = TRUE", 
@@ -1406,18 +1392,17 @@ output$`tutorial-exercise-r12-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r12", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r12", code = "", opts = list(label = "\"r12\"", 
-        exercise = "TRUE", exercise.eval = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good job! This is how I collected the tx dataset. Let's look at what would happen if you do not specify a region in map_data().\"", chunk_opts = list(
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r12", code = "", opts = list(
+        label = "\"r12\"", exercise = "TRUE", exercise.eval = "TRUE"), 
+        engine = "r")), code_check = NULL, error_check = NULL, 
+    check = structure("grade_this_code(correct = \"Good job! This is how I collected the tx dataset. Let's look at what would happen if you do not specify a region in map_data().\")", chunk_opts = list(
         label = "r12-check")), solution = structure(c("id <- map_data(\"state\", region = \"idaho\")", 
     "ggplot(id) +", "  geom_polygon(mapping = aes(x = long, y = lat))"
     ), chunk_opts = list(label = "r12-solution")), tests = NULL, 
@@ -1438,7 +1423,8 @@ learnr:::store_exercise_cache(structure(list(label = "r12", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r12", exercise = TRUE, exercise.eval = TRUE, 
         code = "", out.width.px = "100%", out.height.px = 384, 
         params.src = "r12, exercise = TRUE, exercise.eval = TRUE", 
@@ -1458,19 +1444,17 @@ output$`tutorial-exercise-r13-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r13", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r13", code = "ggplot(us) +\n  geom_polygon(mapping = aes(x = long, y = lat))", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r13", code = "ggplot(us) +\n  geom_polygon(mapping = aes(x = long, y = lat))", 
         opts = list(label = "\"r13\"", exercise = "TRUE", exercise.eval = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! You've mastered a method for drawing maps. Let's take the final step and use the map to display information.\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! You've mastered a method for drawing maps. Let's take the final step and use the map to display information.\")", chunk_opts = list(
         label = "r13-check")), solution = structure(c("ggplot(us) +", 
     "  geom_polygon(mapping = aes(x = long, y = lat, group = group))"
     ), chunk_opts = list(label = "r13-solution")), tests = NULL, 
@@ -1491,7 +1475,8 @@ learnr:::store_exercise_cache(structure(list(label = "r13", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r13", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(us) +", "  geom_polygon(mapping = aes(x = long, y = lat))"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r13, exercise = TRUE, exercise.eval = TRUE", 
@@ -1511,18 +1496,16 @@ output$`tutorial-exercise-r15-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r15", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r15", code = "ggplot(USArrests2) +\n  geom_map(aes(map_id = region, fill = UrbanPop), map = us) +\n  expand_limits(x = us$long, y = us$lat)", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r15", code = "ggplot(USArrests2) +\n  geom_map(aes(map_id = region, fill = UrbanPop), map = us) +\n  expand_limits(x = us$long, y = us$lat)", 
         opts = list(label = "\"r15\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Congratulations! You've used geom_map() to make your first choropleth plot! To test your understanding, alter the code to display the Murder, Assault, or Rape variables.\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Congratulations! You've used geom_map() to make your first choropleth plot! To test your understanding, alter the code to display the Murder, Assault, or Rape variables.\")", chunk_opts = list(
         label = "r15-check")), solution = NULL, tests = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
         tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
@@ -1541,7 +1524,8 @@ learnr:::store_exercise_cache(structure(list(label = "r15", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r15", exercise = TRUE, code = c("ggplot(USArrests2) +", 
         "  geom_map(aes(map_id = region, fill = UrbanPop), map = us) +", 
         "  expand_limits(x = us$long, y = us$lat)"), out.width.px = "100%", 
@@ -1561,19 +1545,17 @@ output$`tutorial-exercise-r16-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r16", global_setup = structure(c("library(learnr)", 
 "library(tidyverse)", "library(maps)", "library(mapproj)", "library(gapminder)", 
-"library(forcats)", "", "asia <- ", "  gapminder %>% ", "  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
+"library(forcats)", "library(gradethis)", "", "asia <- ", "  gapminder %>% ", 
+"  filter(country %in% c(\"China\", \"Korea, Dem. Rep.\", \"Korea, Rep.\", \"Japan\")) %>% ", 
 "  mutate(country = fct_recode(country, \"North Korea\" = \"Korea, Dem. Rep.\", \"South Korea\" = \"Korea, Rep.\"))", 
 "", "tx <- map_data(\"state\", region = \"texas\")", "us <- map_data(\"state\")", 
 "", "USArrests2 <- USArrests %>% ", "  rownames_to_column(\"region\") %>% ", 
-"  mutate(region = tolower(region))", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r16", code = "ggplot(USArrests2) +\n  geom_map(aes(map_id = region, fill = UrbanPop), map = us) +\n  expand_limits(x = us$long, y = us$lat)", 
+"  mutate(region = tolower(region))", "", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r16", code = "ggplot(USArrests2) +\n  geom_map(aes(map_id = region, fill = UrbanPop), map = us) +\n  expand_limits(x = us$long, y = us$lat)", 
         opts = list(label = "\"r16\"", exercise = "TRUE", exercise.eval = "TRUE", 
             exercise.lines = "4"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! To see a list of available projections, visit the `?mapproj` help page, which is hyperlinked from the coord_map() help page.\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! To see a list of available projections, visit the `?mapproj` help page, which is hyperlinked from the coord_map() help page.\")", chunk_opts = list(
         label = "r16-check")), solution = structure(c("ggplot(USArrests2) +", 
     "  geom_map(aes(map_id = region, fill = UrbanPop), map = us) +", 
     "  expand_limits(x = us$long, y = us$lat) +", "  coord_map(projection = \"sinusoidal\")"
@@ -1595,7 +1577,8 @@ learnr:::store_exercise_cache(structure(list(label = "r16", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r16", exercise = TRUE, exercise.eval = TRUE, 
         exercise.lines = 4, code = c("ggplot(USArrests2) +", 
         "  geom_map(aes(map_id = region, fill = UrbanPop), map = us) +", 
@@ -1613,7 +1596,7 @@ learnr:::store_exercise_cache(structure(list(label = "r16", global_setup = struc
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cachem","cellranger","checkmate","cli","colorspace","commonmark","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","forcats","fs","gapminder","gargle","generics","ggplot2","glue","googledrive","googlesheets4","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","labeling","later","learnr","lifecycle","lubridate","magrittr","mapproj","maps","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.4.1","4.1.2","1.0.1","0.4.1","1.0.6","1.1.0","2.1.0","3.6.0","2.0-3","1.9.0","4.1.2","1.5.2","4.1.2","1.1.3","2.2.1","0.6.30","1.1.2","0.3.2","0.18","1.0.4","2.1.1","1.1.0","0.5.2","1.6.3","1.0.0","1.2.1","0.1.3","3.4.0","1.6.2","2.0.0","1.0.1","4.1.2","4.1.2","4.1.2","0.3.1","2.5.1","0.9","1.1.2","0.5.6.1","1.6.2","1.6.15","1.4.4","0.1.4","1.8.4","1.41","0.4.2","1.3.0","0.11.5","1.0.3","1.9.0","2.0.3","1.2.11","3.4.1","1.11","4.1.2","0.12","0.1.10","0.5.0","1.9.0","2.0.3","1.2.0.1","1.0.1","2.5.1","1.0.10","2.1.3","1.4.1","2.0.2","1.1.1","2.18","2.0.3","0.14","1.0.3","0.4.7","1.2.1","1.7.3","4.1.2","1.7.12","1.5.0","3.2.1","1.2.1","1.2.0","1.3.2","0.1.1","4.1.2","0.3.0","1.2.3","4.1.2","0.6.3","2.5.0","0.41","1.3.3","1.8-4","2.3.6"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cachem","cellranger","checkmate","cli","colorspace","commonmark","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","forcats","fs","gapminder","gargle","generics","ggplot2","glue","googledrive","googlesheets4","gradethis","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","labeling","later","learnr","lifecycle","lubridate","magrittr","mapproj","maps","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.5.0","4.1.2","1.0.5","0.4.1","1.0.6","1.1.0","2.1.0","3.6.3","2.1-1","1.9.1","4.1.2","1.5.3","4.1.2","1.2.3","2.2.1","0.6.36","1.1.4","0.3.2","0.24.0","1.0.6","2.1.2","1.2.0","1.0.0","1.6.4","1.0.0","1.2.1","0.1.3","3.4.0","1.7.0","2.0.0","1.0.1","0.2.14","4.1.2","4.1.2","4.1.2","0.3.1","2.5.4","0.9","1.1.3","0.5.6.1","1.6.2","1.6.15","1.4.4","0.1.4","1.8.8","1.41","0.4.3","1.3.0","0.11.5","1.0.4","1.9.0","2.0.3","1.2.11","3.4.2","1.11","4.1.2","0.12","0.1.10","0.5.0","1.9.0","2.0.3","1.2.0.1","1.0.2","2.5.1","1.0.13","2.1.5","1.4.3","2.0.2","1.1.4","2.18","2.0.4","0.16.0","1.0.3","0.4.7","1.2.1","1.7.3","4.1.2","1.8.3","1.5.1","3.2.1","1.3.1","1.2.1","1.3.2","0.1.1","4.1.2","0.4.0","1.2.4","4.1.2","0.6.5","3.0.0","0.41","1.3.3","1.8-4","2.3.6"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>

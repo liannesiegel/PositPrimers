@@ -13,6 +13,7 @@ runtime: shiny_prerendered
 library(learnr)
 library(tidyverse)
 library(nycflights13)
+library(gradethis)
 
 band <- tribble(
    ~name,     ~band,
@@ -66,10 +67,6 @@ criteria <- tribble(
 
 criteria
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -144,7 +141,7 @@ flights %>%
 ```
 
 ```{r ex1-check}
-"Good job! You've calculated the average delay per airline, but the results are difficult to interpret. We don't know which codes are associated with which airlines."
+grade_this_code(correct = "Good job! You've calculated the average delay per airline, but the results are difficult to interpret. We don't know which codes are associated with which airlines.")
 ```
 
 ### airlines
@@ -233,7 +230,7 @@ instrument %>% left_join(band, by = "name")
 ```
 
 ```{r ex4-check}
-"Good Job! Since right and left joins are analagous, you can acheive the same results by switching the order of the data sets in a left join. Notice that this will affect the column order."
+grade_this_code(correct = "Good Job! Since right and left joins are analagous, you can acheive the same results by switching the order of the data sets in a left join. Notice that this will affect the column order.")
 ```
 
 ### full_join()
@@ -311,7 +308,7 @@ flights %>%
 ```
 
 ```{r ex7-check}
-"Great Job! It is now easy to see that Frontier Airlines, AirTran, and ExpressJet had the longest average delays departing New York City in 2013."
+grade_this_code(correct = "Great Job! It is now easy to see that Frontier Airlines, AirTran, and ExpressJet had the longest average delays departing New York City in 2013.")
 ```
 
 ### nycflights13 data sets
@@ -455,7 +452,7 @@ flights %>%
 ```
 
 ```{r ex10-check}
-"Good Job! Flights from NYC to Columbia, South Carolina seem to have arrived particularly late in 2013. At the other end of the list, far off destinations in Alaska and Hawaii tended to arrive ahead of schedule."
+grade_this_code(correct = "Good Job! Flights from NYC to Columbia, South Carolina seem to have arrived particularly late in 2013. At the other end of the list, far off destinations in Alaska and Hawaii tended to arrive ahead of schedule.")
 ```
 
 ### Mutating Joins Recap
@@ -545,7 +542,7 @@ flights %>%
 ```
 
 ```{r ex14-check}
-"Good job! There are 105 distinct destinations in the flights data set."
+grade_this_code(correct = "Good job! There are 105 distinct destinations in the flights data set.")
 ```
 
 ### Exercise - Replace codes with names
@@ -565,7 +562,7 @@ flights %>%
 ```
 
 ```{r ex15-check}
-"Good job! But uh-oh. The third result is an NA. What's going on?"
+grade_this_code(correct = "Good job! But uh-oh. The third result is an NA. What's going on?")
 ```
 
 ### NAs
@@ -595,7 +592,7 @@ flights %>%
 ```
 
 ```{r ex16-check}
-"Good job!"
+grade_this_code(correct = "Good job!")
 ```
 
 ### doublechecking with anti_join()
@@ -620,7 +617,7 @@ flights %>%
 ```
 
 ```{r ex17-check}
-"Good job! Most of the rows in flights are associated with a known airport."
+grade_this_code(correct = "Good job! Most of the rows in flights are associated with a known airport.")
 ```
 
 ### semi_join() for filtering
@@ -755,7 +752,7 @@ bands %>% bind_rows(.id = "origin")
 ```
 
 ```{r ex21-check}
-"Good Job! You can add more than two data sets to your list if you wish to bind together multiple data sets at once."
+grade_this_code(correct = "Good Job! You can add more than two data sets to your list if you wish to bind together multiple data sets at once.")
 ```
 
 

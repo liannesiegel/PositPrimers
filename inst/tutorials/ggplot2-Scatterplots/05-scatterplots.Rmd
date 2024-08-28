@@ -13,11 +13,8 @@ tutorial:
 library(learnr)
 library(ggrepel)
 library(tidyverse)
+library(gradethis)
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(error = TRUE, out.width = "100%")
 ```
 
@@ -81,7 +78,7 @@ mpg %>%
 ```
 
 ```{r r1-check}
-"Good job! It can be tricky to remember when to use %>% and when to use +. Use %>% to add one complete step to a pipe of code. Use + to add one more line to a ggplot2 call."
+grade_this_code(correct = "Good job! It can be tricky to remember when to use %>% and when to use +. Use %>% to add one complete step to a pipe of code. Use + to add one more line to a ggplot2 call.")
 ```
 
 
@@ -114,7 +111,7 @@ mpg %>%
 ```
 
 ```{r r2-check}
-"Good job! geom_text() replaces each point with a piece of text supplied by the label aesthetic. geom_label replaces each point with a textbox. Notice that some pieces of text overlap each other, and others run off the page. We'll soon look at a way to fix this."
+grade_this_code(correct = "Good job! geom_text() replaces each point with a piece of text supplied by the label aesthetic. geom_label replaces each point with a textbox. Notice that some pieces of text overlap each other, and others run off the page. We'll soon look at a way to fix this.")
 ```
 
 
@@ -164,7 +161,7 @@ mpg %>%
 ```
 
 ```{r r3-check}
-"Good job! Now let's look at a way to make geom_smooth() much more useful."
+grade_this_code(correct = "Good job! Now let's look at a way to make geom_smooth() much more useful.")
 ```
 
 ## Layers
@@ -188,7 +185,7 @@ mpg %>%
 ```
 
 ```{r r4-check}
-"Good job! You can add as many geom functions as you like to a plot; but, in practice, a plot will become hard to interpret if it contains more than two or three geoms."
+grade_this_code(correct = "Good job! You can add as many geom functions as you like to a plot; but, in practice, a plot will become hard to interpret if it contains more than two or three geoms.")
 ```
 
 ### geom_label_repel()
@@ -217,7 +214,7 @@ mpg %>%
 ```
 
 ```{r r5-check}
-"Good job! The ggrepel package also provides geom_text_repel(), which is an analog for geom_text()."
+grade_this_code(correct = "Good job! The ggrepel package also provides geom_text_repel(), which is an analog for geom_text().")
 ```
 
 ### Code duplication
@@ -284,7 +281,7 @@ mpg %>%
 ```
 
 ```{r r6-check}
-"Good job! Remember that not every mapping should be a global mapping. Here, only geom_label_repel uses the label aesthetic. Hence, it should remain a local aesthetic to avoid unintended side effects, warnings, or errors."
+grade_this_code(correct = "Good job! Remember that not every mapping should be a global mapping. Here, only geom_label_repel uses the label aesthetic. Hence, it should remain a local aesthetic to avoid unintended side effects, warnings, or errors.")
 ```
 
 
@@ -309,7 +306,7 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 ```
 
 ```{r r7-check}
-"Good Job!"
+grade_this_code(correct = "Good Job!")
 ```
 
 ### Global vs. Local data
@@ -339,7 +336,7 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 ```
 
 ```{r r8-check}
-"Good Job!"
+grade_this_code(correct = "Good Job!")
 ```
 
 ### Exercise 4 - Global vs. Local data
@@ -367,7 +364,7 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 ```
 
 ```{r r9-check}
-"Good Job!"
+grade_this_code(correct = "Good Job!")
 ```
 
 ### last_plot()
@@ -418,7 +415,7 @@ ggplot(data = faithful, mapping = aes(x = waiting, y = eruptions)) +
 ```
 
 ```{r r10-check}
-'Good job! Pass geom_rug() the parameter sides = "l" to limit the rug plot to just the left-hand axis (y) or sides = "b" to limit the rug plot to just the bottom axis (x).'
+grade_this_code(correct = 'Good job! Pass geom_rug() the parameter sides = "l" to limit the rug plot to just the left-hand axis (y) or sides = "b" to limit the rug plot to just the bottom axis (x).')
 ```
 
 
@@ -439,7 +436,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r r11-check}
-"Good job! You can also jitter in only a single direction. To turn off jittering in the x direction set width = 0 in geom_jitter(). To turn off jittering in the y direction, set height = 0." 
+grade_this_code(correct = "Good job! You can also jitter in only a single direction. To turn off jittering in the x direction set width = 0 in geom_jitter(). To turn off jittering in the y direction, set height = 0.") 
 ```
 
 
@@ -460,7 +457,7 @@ ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +
 ```
 
 ```{r r12-check}
-"Good job! If you like, you can make the boxplots more visible by setting the alpha parameter of geom_jitter() to a low number, e.g. geom_jitter(mapping = aes(x = class, y = hwy), width = 0, alpha = 0.5)"
+grade_this_code(correct = "Good job! If you like, you can make the boxplots more visible by setting the alpha parameter of geom_jitter() to a low number, e.g. geom_jitter(mapping = aes(x = class, y = hwy), width = 0, alpha = 0.5)")
 ```
 
 
@@ -541,7 +538,7 @@ ggplot(data = diamonds) +
 ```
 
 ```{r r13-check}
-"Good job! Now let's look at how you can do the same transformation, and others as well with a coord function."
+grade_this_code(correct = "Good job! Now let's look at how you can do the same transformation, and others as well with a coord function.")
 ```
 
 ### coord_trans()

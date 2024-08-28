@@ -673,16 +673,13 @@ plot that you make with ggplot2</li>
 library(learnr)
 library(ggrepel)
 library(tidyverse)
+library(gradethis)
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(error = TRUE, out.width = "100%")
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::register_http_handlers(session, metadata = list(id = "com.rstudio.primers.05-scatterplots", version = 1))
+learnr:::register_http_handlers(session, metadata = list(version = 1))
 </script>
 
 
@@ -723,14 +720,12 @@ output$`tutorial-exercise-r1-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r1", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r1", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot()", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r1", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot()", 
         opts = list(label = "\"r1\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good job! It can be tricky to remember when to use %>% and when to use +. Use %>% to add one complete step to a pipe of code. Use + to add one more line to a ggplot2 call.\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! It can be tricky to remember when to use %>% and when to use +. Use %>% to add one complete step to a pipe of code. Use + to add one more line to a ggplot2 call.\")", chunk_opts = list(
         label = "r1-check")), solution = structure(c("mpg %>% ", 
     "  group_by(class) %>% ", "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
     "  ggplot() +", "    geom_point(mapping = aes(x = mean_cty, y = mean_hwy))"
@@ -752,7 +747,8 @@ learnr:::store_exercise_cache(structure(list(label = "r1", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r1", exercise = TRUE, code = c("mpg %>% ", "  group_by(class) %>% ", 
         "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
         "  ggplot()"), out.width.px = "100%", out.height.px = 384, 
@@ -771,15 +767,13 @@ output$`tutorial-exercise-r2-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r2", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r2", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() +\n    geom_point(mapping = aes(x = mean_cty, y = mean_hwy))", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r2", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() +\n    geom_point(mapping = aes(x = mean_cty, y = mean_hwy))", 
         opts = list(label = "\"r2\"", exercise = "TRUE", exercise.eval = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! geom_text() replaces each point with a piece of text supplied by the label aesthetic. geom_label replaces each point with a textbox. Notice that some pieces of text overlap each other, and others run off the page. We'll soon look at a way to fix this.\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! geom_text() replaces each point with a piece of text supplied by the label aesthetic. geom_label replaces each point with a textbox. Notice that some pieces of text overlap each other, and others run off the page. We'll soon look at a way to fix this.\")", chunk_opts = list(
         label = "r2-check")), solution = structure(c("mpg %>% ", 
     "  group_by(class) %>% ", "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
     "  ggplot() +", "    geom_text(mapping = aes(x = mean_cty, y = mean_hwy, label = class))", 
@@ -803,7 +797,8 @@ learnr:::store_exercise_cache(structure(list(label = "r2", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r2", exercise = TRUE, exercise.eval = TRUE, 
         code = c("mpg %>% ", "  group_by(class) %>% ", "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
         "  ggplot() +", "    geom_point(mapping = aes(x = mean_cty, y = mean_hwy))"
@@ -823,14 +818,12 @@ output$`tutorial-exercise-r3-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r3", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r3", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() ", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r3", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() ", 
         opts = list(label = "\"r3\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good job! Now let's look at a way to make geom_smooth() much more useful.\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! Now let's look at a way to make geom_smooth() much more useful.\")", chunk_opts = list(
         label = "r3-check")), solution = structure(c("mpg %>% ", 
     "  group_by(class) %>% ", "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
     "  ggplot() +", "    geom_smooth(mapping = aes(x = mean_cty, y = mean_hwy), method = lm)"
@@ -852,7 +845,8 @@ learnr:::store_exercise_cache(structure(list(label = "r3", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r3", exercise = TRUE, code = c("mpg %>% ", "  group_by(class) %>% ", 
         "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
         "  ggplot() "), out.width.px = "100%", out.height.px = 384, 
@@ -871,14 +865,12 @@ output$`tutorial-exercise-r4-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r4", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r4", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() +\n    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +\n    geom_smooth(mapping = aes(x = mean_cty, y = mean_hwy), method = lm) ", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r4", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() +\n    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +\n    geom_smooth(mapping = aes(x = mean_cty, y = mean_hwy), method = lm) ", 
         opts = list(label = "\"r4\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good job! You can add as many geom functions as you like to a plot; but, in practice, a plot will become hard to interpret if it contains more than two or three geoms.\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! You can add as many geom functions as you like to a plot; but, in practice, a plot will become hard to interpret if it contains more than two or three geoms.\")", chunk_opts = list(
         label = "r4-check")), solution = NULL, tests = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
         tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
@@ -897,7 +889,8 @@ learnr:::store_exercise_cache(structure(list(label = "r4", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r4", exercise = TRUE, code = c("mpg %>% ", "  group_by(class) %>% ", 
         "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
         "  ggplot() +", "    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +", 
@@ -917,14 +910,12 @@ output$`tutorial-exercise-r5-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r5", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r5", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() +\n    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +\n    geom_smooth(mapping = aes(x = mean_cty, y = mean_hwy), method = lm)", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r5", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() +\n    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +\n    geom_smooth(mapping = aes(x = mean_cty, y = mean_hwy), method = lm)", 
         opts = list(label = "\"r5\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good job! The ggrepel package also provides geom_text_repel(), which is an analog for geom_text().\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! The ggrepel package also provides geom_text_repel(), which is an analog for geom_text().\")", chunk_opts = list(
         label = "r5-check")), solution = structure(c("mpg %>% ", 
     "  group_by(class) %>% ", "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
     "  ggplot() +", "    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +", 
@@ -948,7 +939,8 @@ learnr:::store_exercise_cache(structure(list(label = "r5", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r5", exercise = TRUE, code = c("mpg %>% ", "  group_by(class) %>% ", 
         "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
         "  ggplot() +", "    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +", 
@@ -968,15 +960,13 @@ output$`tutorial-exercise-r6-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r6", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r6", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() +\n    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +\n    geom_smooth(mapping = aes(x = mean_cty, y = mean_hwy), method = lm) +\n    geom_label_repel(mapping = aes(x = mean_cty, y = mean_hwy, label = class))", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r6", code = "mpg %>% \n  group_by(class) %>% \n  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% \n  ggplot() +\n    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +\n    geom_smooth(mapping = aes(x = mean_cty, y = mean_hwy), method = lm) +\n    geom_label_repel(mapping = aes(x = mean_cty, y = mean_hwy, label = class))", 
         opts = list(label = "\"r6\"", exercise = "TRUE", exercise.eval = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! Remember that not every mapping should be a global mapping. Here, only geom_label_repel uses the label aesthetic. Hence, it should remain a local aesthetic to avoid unintended side effects, warnings, or errors.\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! Remember that not every mapping should be a global mapping. Here, only geom_label_repel uses the label aesthetic. Hence, it should remain a local aesthetic to avoid unintended side effects, warnings, or errors.\")", chunk_opts = list(
         label = "r6-check")), solution = structure(c("mpg %>% ", 
     "  group_by(class) %>% ", "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
     "  ggplot(mapping = aes(x = mean_cty, y = mean_hwy)) +", 
@@ -999,7 +989,8 @@ learnr:::store_exercise_cache(structure(list(label = "r6", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r6", exercise = TRUE, exercise.eval = TRUE, 
         code = c("mpg %>% ", "  group_by(class) %>% ", "  summarise(mean_cty = mean(cty), mean_hwy = mean(hwy)) %>% ", 
         "  ggplot() +", "    geom_point(mapping = aes(x = mean_cty, y = mean_hwy)) +", 
@@ -1021,14 +1012,12 @@ output$`tutorial-exercise-r7-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r7", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r7", code = "", opts = list(label = "\"r7\"", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r7", code = "", opts = list(label = "\"r7\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good Job!\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good Job!\")", chunk_opts = list(
         label = "r7-check")), solution = structure(c("ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +", 
     "  geom_point(mapping = aes(color = class)) +", "  geom_smooth()"
     ), chunk_opts = list(label = "r7-solution")), tests = NULL, 
@@ -1049,7 +1038,8 @@ learnr:::store_exercise_cache(structure(list(label = "r7", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r7", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r7, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1066,14 +1056,12 @@ output$`tutorial-exercise-r8-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r8", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r8", code = "mpg2 <- filter(mpg, class == \"2seater\")", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r8", code = "mpg2 <- filter(mpg, class == \"2seater\")", 
         opts = list(label = "\"r8\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good Job!\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good Job!\")", chunk_opts = list(
         label = "r8-check")), solution = structure(c("mpg2 <- filter(mpg, class == \"2seater\")", 
     "", "ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +", 
     "  geom_point() +", "  geom_point(data = mpg2, color = \"red\", size = 2)"
@@ -1095,7 +1083,8 @@ learnr:::store_exercise_cache(structure(list(label = "r8", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r8", exercise = TRUE, code = "mpg2 <- filter(mpg, class == \"2seater\")", 
         out.width.px = "100%", out.height.px = 384, params.src = "r8, exercise = TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r", 
@@ -1112,14 +1101,12 @@ output$`tutorial-exercise-r9-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r9", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r9", code = "", opts = list(label = "\"r9\"", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r9", code = "", opts = list(label = "\"r9\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good Job!\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good Job!\")", chunk_opts = list(
         label = "r9-check")), solution = structure(c("mpg3 <- filter(mpg, hwy > 40)", 
     "", "ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +", 
     "  geom_point() +", "  geom_label_repel(data = mpg3, mapping = aes(label = class))"
@@ -1141,7 +1128,8 @@ learnr:::store_exercise_cache(structure(list(label = "r9", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r9", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r9, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1158,14 +1146,12 @@ output$`tutorial-exercise-r10-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r10", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r10", code = "", opts = list(label = "\"r10\"", 
-        exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("'Good job! Pass geom_rug() the parameter sides = \"l\" to limit the rug plot to just the left-hand axis (y) or sides = \"b\" to limit the rug plot to just the bottom axis (x).'", chunk_opts = list(
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r10", code = "", opts = list(
+        label = "\"r10\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = 'Good job! Pass geom_rug() the parameter sides = \"l\" to limit the rug plot to just the left-hand axis (y) or sides = \"b\" to limit the rug plot to just the bottom axis (x).')", chunk_opts = list(
         label = "r10-check")), solution = structure(c("ggplot(data = faithful, mapping = aes(x = waiting, y = eruptions)) +", 
     "  geom_point() +", "  geom_rug()"), chunk_opts = list(label = "r10-solution")), 
     tests = NULL, options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -1185,7 +1171,8 @@ learnr:::store_exercise_cache(structure(list(label = "r10", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r10", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r10, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1202,15 +1189,13 @@ output$`tutorial-exercise-r11-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r11", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r11", code = "ggplot(data = mpg) +\n  geom_point(mapping = aes(x = class, y = hwy))", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r11", code = "ggplot(data = mpg) +\n  geom_point(mapping = aes(x = class, y = hwy))", 
         opts = list(label = "\"r11\"", exercise = "TRUE", exercise.eval = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! You can also jitter in only a single direction. To turn off jittering in the x direction set width = 0 in geom_jitter(). To turn off jittering in the y direction, set height = 0.\" ", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! You can also jitter in only a single direction. To turn off jittering in the x direction set width = 0 in geom_jitter(). To turn off jittering in the y direction, set height = 0.\") ", chunk_opts = list(
         label = "r11-check")), solution = structure(c("ggplot(data = mpg) +", 
     "  geom_jitter(mapping = aes(x = class, y = hwy))"), chunk_opts = list(
         label = "r11-solution")), tests = NULL, options = list(
@@ -1230,7 +1215,8 @@ learnr:::store_exercise_cache(structure(list(label = "r11", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r11", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(data = mpg) +", "  geom_point(mapping = aes(x = class, y = hwy))"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r11, exercise = TRUE, exercise.eval = TRUE", 
@@ -1249,14 +1235,12 @@ output$`tutorial-exercise-r12-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r12", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r12", code = "", opts = list(label = "\"r12\"", 
-        exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! If you like, you can make the boxplots more visible by setting the alpha parameter of geom_jitter() to a low number, e.g. geom_jitter(mapping = aes(x = class, y = hwy), width = 0, alpha = 0.5)\"", chunk_opts = list(
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r12", code = "", opts = list(
+        label = "\"r12\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! If you like, you can make the boxplots more visible by setting the alpha parameter of geom_jitter() to a low number, e.g. geom_jitter(mapping = aes(x = class, y = hwy), width = 0, alpha = 0.5)\")", chunk_opts = list(
         label = "r12-check")), solution = structure(c("ggplot(data = mpg, mapping = aes(x = class, y = hwy)) +", 
     "  geom_boxplot(outlier.alpha = 0) +", "  geom_jitter(width = 0)"
     ), chunk_opts = list(label = "r12-solution")), tests = NULL, 
@@ -1277,7 +1261,8 @@ learnr:::store_exercise_cache(structure(list(label = "r12", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r12", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r12, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1294,14 +1279,12 @@ output$`tutorial-exercise-r13-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r13", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r13", code = "", opts = list(label = "\"r13\"", 
-        exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! Now let's look at how you can do the same transformation, and others as well with a coord function.\"", chunk_opts = list(
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r13", code = "", opts = list(
+        label = "\"r13\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! Now let's look at how you can do the same transformation, and others as well with a coord function.\")", chunk_opts = list(
         label = "r13-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_point(mapping = aes(x = log(carat), y = log(price))) "
     ), chunk_opts = list(label = "r13-solution")), tests = NULL, 
@@ -1322,7 +1305,8 @@ learnr:::store_exercise_cache(structure(list(label = "r13", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r13", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r13, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1339,12 +1323,10 @@ output$`tutorial-exercise-r14-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r14", global_setup = structure(c("library(learnr)", 
-"library(ggrepel)", "library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
-"knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
-    label = "setup", include = FALSE)), setup = NULL, chunks = list(
-    list(label = "r14", code = "ggplot(data = diamonds) +\n  geom_point(mapping = aes(x = carat, y = price)) +\n  coord_trans(x = \"log\", y = \"log\")", 
+"library(ggrepel)", "library(tidyverse)", "library(gradethis)", 
+"", "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "r14", code = "ggplot(data = diamonds) +\n  geom_point(mapping = aes(x = carat, y = price)) +\n  coord_trans(x = \"log\", y = \"log\")", 
         opts = list(label = "\"r14\"", exercise = "TRUE"), engine = "r")), 
     code_check = NULL, error_check = NULL, check = NULL, solution = NULL, 
     tests = NULL, options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -1364,7 +1346,8 @@ learnr:::store_exercise_cache(structure(list(label = "r14", global_setup = struc
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r14", exercise = TRUE, code = c("ggplot(data = diamonds) +", 
         "  geom_point(mapping = aes(x = carat, y = price)) +", 
         "  coord_trans(x = \"log\", y = \"log\")"), out.width.px = "100%", 
@@ -1380,7 +1363,7 @@ learnr:::store_exercise_cache(structure(list(label = "r14", global_setup = struc
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cachem","cellranger","checkmate","cli","colorspace","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","forcats","fs","gargle","generics","ggplot2","ggrepel","glue","googledrive","googlesheets4","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","labeling","later","lattice","learnr","lifecycle","lubridate","magrittr","Matrix","methods","mgcv","mime","modelr","munsell","nlme","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","splines","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","viridisLite","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.4.1","4.1.2","1.0.1","0.4.1","1.0.6","1.1.0","2.1.0","3.6.0","2.0-3","4.1.2","1.5.2","4.1.2","1.1.3","2.2.1","0.6.30","1.1.2","0.3.2","0.18","1.0.4","2.1.1","1.1.0","0.5.2","1.6.3","1.2.1","0.1.3","3.4.0","0.9.2","1.6.2","2.0.0","1.0.1","4.1.2","4.1.2","4.1.2","0.3.1","2.5.1","0.9","1.1.2","0.5.6.1","1.6.2","1.6.15","1.4.4","0.1.4","1.8.4","1.41","0.4.2","1.3.0","0.20-45","0.11.5","1.0.3","1.9.0","2.0.3","1.5-1","4.1.2","1.8-41","0.12","0.1.10","0.5.0","3.1-160","1.9.0","2.0.3","1.2.0.1","1.0.1","2.5.1","1.0.10","2.1.3","1.4.1","2.0.2","1.1.1","2.18","2.0.3","0.14","1.0.3","0.4.7","1.2.1","1.7.3","4.1.2","4.1.2","1.7.12","1.5.0","3.2.1","1.2.1","1.2.0","1.3.2","0.1.1","4.1.2","0.3.0","1.2.3","4.1.2","0.6.3","0.4.1","2.5.0","0.41","1.3.3","1.8-4","2.3.6"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cachem","cellranger","checkmate","cli","colorspace","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","forcats","fs","gargle","generics","ggplot2","ggrepel","glue","googledrive","googlesheets4","gradethis","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","labeling","later","lattice","learnr","lifecycle","lubridate","magrittr","Matrix","methods","mgcv","mime","modelr","munsell","nlme","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","splines","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","viridisLite","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.5.0","4.1.2","1.0.5","0.4.1","1.0.6","1.1.0","2.1.0","3.6.3","2.1-1","4.1.2","1.5.3","4.1.2","1.2.3","2.2.1","0.6.36","1.1.4","0.3.2","0.24.0","1.0.6","2.1.2","1.2.0","1.0.0","1.6.4","1.2.1","0.1.3","3.4.0","0.9.2","1.7.0","2.0.0","1.0.1","0.2.14","4.1.2","4.1.2","4.1.2","0.3.1","2.5.4","0.9","1.1.3","0.5.6.1","1.6.2","1.6.15","1.4.4","0.1.4","1.8.8","1.41","0.4.3","1.3.0","0.22-6","0.11.5","1.0.4","1.9.0","2.0.3","1.5-1","4.1.2","1.8-41","0.12","0.1.10","0.5.0","3.1-160","1.9.0","2.0.3","1.2.0.1","1.0.2","2.5.1","1.0.13","2.1.5","1.4.3","2.0.2","1.1.4","2.18","2.0.4","0.16.0","1.0.3","0.4.7","1.2.1","1.7.3","4.1.2","4.1.2","1.8.3","1.5.1","3.2.1","1.3.1","1.2.1","1.3.2","0.1.1","4.1.2","0.4.0","1.2.4","4.1.2","0.6.5","0.4.1","3.0.0","0.41","1.3.3","1.8-4","2.3.6"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>

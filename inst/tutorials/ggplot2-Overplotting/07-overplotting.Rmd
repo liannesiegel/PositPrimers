@@ -14,11 +14,8 @@ tutorial:
 library(learnr)
 library(tidyverse)
 library(hexbin)
+library(gradethis)
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -97,7 +94,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r r1-check}
-"Good job! You can now identify which values contain more observations. The darker locations contain several points stacked on top of each other."
+grade_this_code(correct = "Good job! You can now identify which values contain more observations. The darker locations contain several points stacked on top of each other.")
 ```
 
 ### Adjust the position
@@ -128,7 +125,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r r2-check}
-"Good job! Now let's look at ways to handle overplotting due to large datasets."
+grade_this_code(correct = "Good job! Now let's look at ways to handle overplotting due to large datasets.")
 ```
 
 ## Large data
@@ -175,7 +172,7 @@ ggplot(data = diamonds) +
 ```
 
 ```{r r3-check}
-"Good job! The medians of the boxplots give a somewhat more precise description of the relationship between carat and price than does the fan of individual points."
+grade_this_code(correct = "Good job! The medians of the boxplots give a somewhat more precise description of the relationship between carat and price than does the fan of individual points.")
 ```
 
 ### geom_bin2d()
@@ -206,7 +203,7 @@ ggplot(data = diamonds) +
 ```
 
 ```{r r4-check}
-"Good job! As with histograms, bin2ds can reveal different information at different binwidths."
+grade_this_code(correct = "Good job! As with histograms, bin2ds can reveal different information at different binwidths.")
 ```
 
 ### Exercise - geom_hex()
@@ -226,7 +223,7 @@ ggplot(data = diamonds) +
 ```
 
 ```{r r5-check}
-"Good job! You need to have the hexbin package installed on your computer, but not necessarily loaded, to use geom_hex()."
+grade_this_code(correct = "Good job! You need to have the hexbin package installed on your computer, but not necessarily loaded, to use geom_hex().")
 ```
 
 ### geom_density2d()
@@ -270,7 +267,7 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
 ```
 
 ```{r r6-check}
-"Good job! Plotting a summay on top of raw values is a common pattern in data science."
+grade_this_code(correct = "Good job! Plotting a summary on top of raw values is a common pattern in data science.")
 ```
 
 ### Recap

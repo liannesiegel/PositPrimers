@@ -12,10 +12,11 @@ tutorial:
 ```{r setup, include=FALSE}
 library(learnr)
 library(tidyverse)
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
+library(gradethis)
+# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
+#   list(message = check_code, correct = TRUE, location = "append")
+# }
+# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 ```
 
 ```{r, context="server-start", include=FALSE}
@@ -97,7 +98,7 @@ mpg
 ```
 
 ```{r mpg0-check}
-"Good job!  We'll use interactive code chunks like this throughout these tutorials. Whenever you encounter one, you can click Submit Answer to run (or re-run) the code in the chunk. If there is a Solution button, you can click it to see the answer."
+grade_this_code(correct = "Good job!  We'll use interactive code chunks like this throughout these tutorials. Whenever you encounter one, you can click Submit Answer to run (or re-run) the code in the chunk. If there is a Solution button, you can click it to see the answer.")
 ```
 
 You can use the black triangle that appears at the top right of the table to scroll through all of the columns in `mpg`.
@@ -197,7 +198,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r template-check}
-"Good job! This plot uses boxplots to compare the fuel efficiencies of different types of cars. ggplot2 comes with many geom functions that each add a different type of layer to a plot. You'll learn more about boxplots and other geoms in the tutorials that follow."
+grade_this_code(correct = "Good job! This plot uses boxplots to compare the fuel efficiencies of different types of cars. ggplot2 comes with many geom functions that each add a different type of layer to a plot. You'll learn more about boxplots and other geoms in the tutorials that follow.")
 ```
 
 ### Common problems
@@ -230,7 +231,7 @@ Run `ggplot(data = mpg)` what do you see?
 ```
 
 ```{r blank-check}
-"Good job! A ggplot that has no layers looks blank. To finish the graph, add a geom function."
+grade_this_code(correct = "Good job! A ggplot that has no layers looks blank. To finish the graph, add a geom function.")
 ```
      
 ### Exercise 2 
@@ -242,7 +243,7 @@ Make a scatterplot of `cty` vs `hwy`.
 ```
 
 ```{r scatterplot-check}
-"Excellent work!"
+grade_this_code(correct = "Excellent work!")
 ```
 
 ```{r scatterplot-hint}
@@ -258,7 +259,7 @@ What happens if you make a scatterplot of `class` vs `drv`. Try it. Why is the p
 ```
 
 ```{r scatterplot2-check}
-"Nice job! `class` and `drv` are both categorical variables. As a result, points can only appear at certain values, where many points overlap each other. You have no idea how many points fall on top of each other at each location. Experiment with geom_count() to find a better solution."
+grade_this_code(correct = "Nice job! `class` and `drv` are both categorical variables. As a result, points can only appear at certain values, where many points overlap each other. You have no idea how many points fall on top of each other at each location. Experiment with geom_count() to find a better solution.")
 ```
 
 
@@ -320,7 +321,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r aesthetics-check}
-"Great Job! You can now tell which class of car each point represents by examining the color of the point."
+grade_this_code(correct = "Great Job! You can now tell which class of car each point represents by examining the color of the point.")
 ```
 
 ### And the answer is...
@@ -356,7 +357,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r size-check}
-"Great Job! Now the size of a point represents its class. Did you notice the warning message? ggplot2 gives us a warning here because mapping an unordered variable (class) to an ordered aesthetic (size) is not a good idea."
+grade_this_code(correct = "Great Job! Now the size of a point represents its class. Did you notice the warning message? ggplot2 gives us a warning here because mapping an unordered variable (class) to an ordered aesthetic (size) is not a good idea.")
 ```
 
 ### alpha
@@ -378,7 +379,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r alpha-check}
-"Great Job! If you look closely, you can spot something subtle: many locations contain multiple points stacked on top of each other (alpha is additive so multiple transparent points will appear opaque)."
+grade_this_code(correct = "Great Job! If you look closely, you can spot something subtle: many locations contain multiple points stacked on top of each other (alpha is additive so multiple transparent points will appear opaque).")
 ```
 
 ### Shape
@@ -400,7 +401,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r shape-check}
-"Good work! What happened to the SUVs? ggplot2 will only use six shapes at a time. By default, additional groups will go unplotted when you use the shape aesthetic. So only use it when you have fewer than seven groups."
+grade_this_code(correct = "Good work! What happened to the SUVs? ggplot2 will only use six shapes at a time. By default, additional groups will go unplotted when you use the shape aesthetic. So only use it when you have fewer than seven groups.")
 ```
 
 ### Exercise 1
@@ -422,7 +423,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r cty-check}
-"Very nice! ggplot2 treats continuous and categorical variables differently. Noteably, ggplot2 supplies a blue gradient when you map a continuous variable to color, and ggplot2 will not map continuous variables to shape."
+grade_this_code(correct = "Very nice! ggplot2 treats continuous and categorical variables differently. Noteably, ggplot2 supplies a blue gradient when you map a continuous variable to color, and ggplot2 will not map continuous variables to shape.")
 ```
     
 ### Exercise 2
@@ -435,7 +436,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r multiple-check}
-"Very nice! ggplot2 can map the same variable to multiple aesthetics."
+grade_this_code(correct = "Very nice! ggplot2 can map the same variable to multiple aesthetics.")
 ```
     
 <div id="multiple-hint">
@@ -452,7 +453,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r nonvar-check}
-"Good job! ggplot2 will map the aesthetic to the results of the expression. Here, ggplot2 mapped the color of each point to TRUE or FALSE based on whther the point's `displ` value was less than five."
+grade_this_code(correct = "Good job! ggplot2 will map the aesthetic to the results of the expression. Here, ggplot2 mapped the color of each point to TRUE or FALSE based on whther the point's `displ` value was less than five.")
 ```
 
 ### Setting aesthetics
@@ -502,7 +503,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r e4-check}
-"Good job! Putting an aesthetic in the wrong location is one of the most common graphing errors. Sometimes it helps to think of legends. If you will need a legend to understand what the color/shape/etc. means, then you should probably put the aesthetic inside `aes()` --- ggplot2 will build a legend for every aesthetic mapped here. If the aesthetic has no meaning and is just... well, aesthetic, then set it outside of `aes()`."
+grade_this_code(correct = "Good job! Putting an aesthetic in the wrong location is one of the most common graphing errors. Sometimes it helps to think of legends. If you will need a legend to understand what the color/shape/etc. means, then you should probably put the aesthetic inside `aes()` --- ggplot2 will build a legend for every aesthetic mapped here. If the aesthetic has no meaning and is just... well, aesthetic, then set it outside of `aes()`.")
 ```
 
 
@@ -552,14 +553,14 @@ ggplot(data = mpg) +
 ```
 
 ```{r geom-check}
-"Good job! You get the plot on the right (above)."
+grade_this_code(correct = "Good job! You get the plot on the right (above).")
 ```
 
 ### More about geoms
 
 ggplot2 provides over 30 geom functions that you can use to make plots, and extension packages provide even more (see <https://exts.ggplot2.tidyverse.org/gallery/> for a sampling). You'll learn how to use these geoms to explore data in the [Visualize Data]() primer. 
 
-Until then, the best way to get a comprehensive overview of the available geoms is with the [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf). To learn more about any single geom, look at its help page, e.g. `?geom_smooth`.
+Until then, the best way to get a comprehensive overview of the available geoms is with the [ggplot2 cheatsheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf). To learn more about any single geom, look at its help page, e.g. `?geom_smooth`.
 
 ### Exercise 1
 

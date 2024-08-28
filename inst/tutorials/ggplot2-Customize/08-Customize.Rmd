@@ -16,6 +16,7 @@ library(tidyverse)
 library(ggthemes)
 library(RColorBrewer)
 library(viridis)
+library(gradethis)
 
 p <- ggplot(diamonds) +
   geom_boxplot(mapping = aes(x = cut, y = price))
@@ -35,10 +36,6 @@ p_legend <- ggplot(data = mpg) +
               shape = 21, size = 3, stroke = 1) +
   theme_bw()
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(error = TRUE, out.width = "100%", message = FALSE)
 ```
 
@@ -95,7 +92,7 @@ ggplot(diamonds) +
 ```
 
 ```{r r1-check}
-"Good job! Let's use this plot as a starting point to make a more pleasing plot that displays a clear message."
+grade_this_code(correct = "Good job! Let's use this plot as a starting point to make a more pleasing plot that displays a clear message.")
 ```
 
 ### Storing plots
@@ -118,7 +115,7 @@ p
 ```
 
 ```{r r2-check}
-"Good job! By the way, have you taken a moment to look at what the plot shows? Let's do that now."
+grade_this_code(correct = "Good job! By the way, have you taken a moment to look at what the plot shows? Let's do that now.")
 ```
 
 ### Surprise?
@@ -175,7 +172,7 @@ p + ylim(0, 7500)
 ```
 
 ```{r r3-check}
-"Good job! Zooming by clipping will sometimes make the graph you want, but in our case it is a very bad idea. Can you tell why?"
+grade_this_code(correct = "Good job! Zooming by clipping will sometimes make the graph you want, but in our case it is a very bad idea. Can you tell why?")
 ```
 
 ### A caution
@@ -209,7 +206,7 @@ p + coord_cartesian(ylim = c(0, 7500))
 ```
 
 ```{r r4-check}
-"Good job! Now it is much easier to see the differences in the median."
+grade_this_code(correct = "Good job! Now it is much easier to see the differences in the median.")
 ```
 
 ### p
@@ -286,7 +283,7 @@ p + labs(title = "Diamond prices by cut",
 ```
 
 ```{r r5-check}
-"Good job! By the way, why *do* fair cut diamonds fetch the highest price?"
+grade_this_code(correct = "Good job! By the way, why *do* fair cut diamonds fetch the highest price?")
 ```
 
 ### Exercise 3 - Carat size? 
@@ -310,7 +307,7 @@ ggplot(data = diamonds, mapping = aes(x = carat, y = price)) +
 ```
 
 ```{r r6-check}
-"Good job! The plot corroborates our hypothesis."
+grade_this_code(correct = "Good job! The plot corroborates our hypothesis.")
 ```
 
 ### p1
@@ -376,7 +373,7 @@ p1 + theme_classic()
 ```
 
 ```{r r7-check}
-"Good Job! ggplot2 uses theme_gray()` by default."
+grade_this_code(correct = "Good Job! ggplot2 uses theme_gray()` by default.")
 ```
 
 ### ggthemes
@@ -415,7 +412,7 @@ p1 + theme_wsj()
 ```
 
 ```{r r8-check}
-"Good Job! Notice that each theme supplies its own font sizes, which means that your captions might run off the page for some themes. In practice, you can fix this by resizing your graph window."
+grade_this_code(correct = "Good Job! Notice that each theme supplies its own font sizes, which means that your captions might run off the page for some themes. In practice, you can fix this by resizing your graph window.")
 ```
 
 ### Update p1
@@ -499,7 +496,7 @@ p1 + scale_color_brewer()
 ```
 
 ```{r r9-check}
-"Good job! scale_color_brewer() applies a color palette from the RColorBrewer package, a package that specializes in attractive color palettes." 
+grade_this_code(correct = "Good job! scale_color_brewer() applies a color palette from the RColorBrewer package, a package that specializes in attractive color palettes.")
 ```
 
 ### RColorBrewer
@@ -513,7 +510,7 @@ Altogether, the RColorBrewer package contains 35 palettes. You can see each pale
 ```
 
 ```{r r10-check}
-"Good job! Our graph above used the Blues palette (the default)." 
+grade_this_code(correct = "Good job! Our graph above used the Blues palette (the default).")
 ```
 
 ```{r r10-solution}
@@ -546,7 +543,7 @@ p1 + scale_color_brewer(palette = "Spectral")
 ```
 
 ```{r r11-check}
-"Good job! scale_color_brewer() is one of the most useful functions for customizing colors in ggplot2 because it does for you the hard work of selecting a pleasing combination of colors. If you'd like to select individual colors yourself, try the scale_color_manual() function."
+grade_this_code(correct = "Good job! scale_color_brewer() is one of the most useful functions for customizing colors in ggplot2 because it does for you the hard work of selecting a pleasing combination of colors. If you'd like to select individual colors yourself, try the scale_color_manual() function.")
 ```
 
 ### Continuous colors
@@ -600,7 +597,7 @@ p_cont + scale_color_distiller(palette = "BrBG")
 ```
 
 ```{r r12-check}
-"Good job! ggplot2 also supplies scale_color_gradient(), scale_color_gradient2(), and scale_color_gradientn(), which you can use to  construct gradients manually between 2, 3, and n colors."
+grade_this_code(correct = "Good job! ggplot2 also supplies scale_color_gradient(), scale_color_gradient2(), and scale_color_gradientn(), which you can use to  construct gradients manually between 2, 3, and n colors.")
 ```
 
 ### viridis
@@ -630,7 +627,7 @@ p_cont + scale_color_viridis(option = "D")
 ```
 
 ```{r r13-check}
-"Good job! Option D is the default if you do not select an option."
+grade_this_code(correct = "Good job! Option D is the default if you do not select an option.")
 ```
 
 ## Legends
@@ -665,7 +662,7 @@ p_cont + theme(legend.position = "bottom")
 ```
 
 ```{r r14-check}
-"Good job! If you move the legend to the top or bottom of the plot, ggplot2 will reogranize the orientation of the legend from vertical to horizontal."
+grade_this_code(correct = "Good job! If you move the legend to the top or bottom of the plot, ggplot2 will reogranize the orientation of the legend from vertical to horizontal.")
 ```
 
 ### theme() vs. themes
@@ -721,7 +718,7 @@ p_legend + guides(fill = "none", color = "none")
 ```
 
 ```{r r16-check}
-"Good job! If you move the legend to the top or bottom of the plot, ggplot2 will reogranize the orientation of the legend from vertical to horizontal."
+grade_this_code(correct = "Good job! If you move the legend to the top or bottom of the plot, ggplot2 will reogranize the orientation of the legend from vertical to horizontal.")
 ```
 
 ### Labels
@@ -783,7 +780,7 @@ p_cont + scale_color_continuous(name = "Highway MPG") + theme(legend.position = 
 ```
 
 ```{r r17-check}
-"Good job!"
+grade_this_code(correct = "Good job!")
 ```
 
 

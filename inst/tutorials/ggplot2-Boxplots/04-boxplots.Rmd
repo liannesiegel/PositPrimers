@@ -12,11 +12,8 @@ tutorial:
 ```{r setup, include=FALSE}
 library(learnr)
 library(tidyverse)
+library(gradethis)
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(error = TRUE, out.width = "100%")
 ```
 
@@ -133,7 +130,7 @@ ggplot(data = diamonds) +
 ```
 
 ```{r r3-check}
-"Do you notice how many outliers appear in the plot? The boxplot algorithm can identify many outliers if your data is big, perhaps too many. Let's look at ways to suppress the appearance of outliers in your plot."
+grade_this_code(correct = "Do you notice how many outliers appear in the plot? The boxplot algorithm can identify many outliers if your data is big, perhaps too many. Let's look at ways to suppress the appearance of outliers in your plot.")
 ```
 
 ### Outliers
@@ -229,7 +226,7 @@ cut_width(continuous_vector, width = 2)
 ```
 
 ```{r cut-check}
-"Good job! Now let's apply the cut functions to our graph."
+grade_this_code(correct = "Good job! Now let's apply the cut functions to our graph.")
 ```
 
 ### Exercise 4 - Apply a cut function
@@ -249,7 +246,7 @@ ggplot(data = diamonds) +
 ```
 
 ```{r r4-check}
-"Good job! You can now see a relationship between price and carat. You could also make a scatterplot of these variables, but in this case, it would be a black mass of 54,000 data points."
+grade_this_code(correct = "Good job! You can now see a relationship between price and carat. You could also make a scatterplot of these variables, but in this case, it would be a black mass of 54,000 data points.")
 ```
 
 ### coord_flip()
@@ -280,7 +277,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r r5-check}
-"Good job! `coord_flip()` is an example of a new coordinate system. You'll learn much more about ggplot2 coordinate systems in a later tutorial."
+grade_this_code(correct = "Good job! `coord_flip()` is an example of a new coordinate system. You'll learn much more about ggplot2 coordinate systems in a later tutorial.")
 ```
 
 
@@ -307,9 +304,9 @@ ggplot(data = mpg) +
 ```
 
 ```{r r6-check}
-'Good job! When you set `stackdir = "center"`, `geom_dotplot()` arranges each row of dots symmetrically around the $x$ value. This layout will help you understand the next geom.
+grade_this_code(correct = 'Good job! When you set `stackdir = "center"`, `geom_dotplot()` arranges each row of dots symmetrically around the $x$ value. This layout will help you understand the next geom.
 
-As in the histogram tutorial, it takes a lot of tweaking to make a dotplot look right. As a result, I tend to only use them when I want to make a point.'
+As in the histogram tutorial, it takes a lot of tweaking to make a dotplot look right. As a result, I tend to only use them when I want to make a point.')
 ```
 
 ### geom_violin()
@@ -331,7 +328,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r r7-check}
-'Good job! Another way to interpret a violin plot is to mentally "push" the width of each violin all to one side (so the other side is a straight line). The result would be a density (e.g. `geom_density()`) turned on its side for each distribution).'
+grade_this_code(correct = 'Good job! Another way to interpret a violin plot is to mentally "push" the width of each violin all to one side (so the other side is a straight line). The result would be a density (e.g. `geom_density()`) turned on its side for each distribution).')
 ```
 
 ### Exercise 7 - Violin plots
@@ -351,7 +348,7 @@ ggplot(data = mpg) +
 ```
 
 ```{r r8-check}
-'Good job! Can you predict how you would use `draw_quantiles` to draw a horizontal line at a different percentile, like the 60th percentile?.'
+grade_this_code(correct = 'Good job! Can you predict how you would use `draw_quantiles` to draw a horizontal line at a different percentile, like the 60th percentile?.')
 ```
 
 ## Counts
@@ -431,7 +428,7 @@ Practice the method above by re-creating the heat map below.
 ```
 
 ```{r r10-check}
-"Good job!"
+grade_this_code(correct = "Good job!")
 ```
 
 

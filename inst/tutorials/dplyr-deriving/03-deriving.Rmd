@@ -14,6 +14,7 @@ tutorial:
 library(learnr)
 library(tidyverse)
 library(babynames)
+library(gradethis)
 
 tops <- babynames::babynames %>% 
   group_by(name, sex) %>% 
@@ -32,10 +33,6 @@ number_ones <- babynames::babynames %>%
   distinct(name) %>% 
   .$name
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -214,7 +211,7 @@ babynames %>%
 ```
 
 ```{r distinct-check}
-"Good job! The two numbers are different because most names appear in the data set more than once. They appear once for each year in which they were used."
+grade_this_code(correct = "Good job! The two numbers are different because most names appear in the data set more than once. They appear once for each year in which they were used.")
 ```
 
 ### summarise by groups?
@@ -364,7 +361,7 @@ top_10 %>%
 ```
 
 ```{r popular-3-check}
-"Good job! This graph shows different trends than the one above, now let's consider why."
+grade_this_code(correct = "Good job! This graph shows different trends than the one above, now let's consider why.")
 ```
 
 ## mutate()
@@ -516,7 +513,7 @@ babynames %>%
 ```
 
 ```{r mutate-4-check}
-"Congratulations! Our second provides a different picture of popularity. Here we see names that have been consistently popular over time, including new entries like Elizabeth and Thomas."
+grade_this_code(correct = "Congratulations! Our second provides a different picture of popularity. Here we see names that have been consistently popular over time, including new entries like Elizabeth and Thomas.")
 ```
 
 ### Recap
@@ -538,7 +535,7 @@ Together these six functions create a _grammar_ of data manipulation, a system o
 1. _Data sets often contain more information than you need_
 1. _Data sets imply more information than they display_
 
-The six dplyr functions help you work with these realities by isolating and revealing the information contained in your data. In fact, dplyr provides more than six functions for this grammar: dplyr comes with several functions that are variations on the themes of `select()`, `filter()`, `summarise()`, and `mutate()`. Each follows the same pipeable syntax that is used throughout dplyr. If you are interested, you can learn more about these peripheral functions in the [dplyr cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/source/pdfs/data-transformation-cheatsheet.pdf).
+The six dplyr functions help you work with these realities by isolating and revealing the information contained in your data. In fact, dplyr provides more than six functions for this grammar: dplyr comes with several functions that are variations on the themes of `select()`, `filter()`, `summarise()`, and `mutate()`. Each follows the same pipeable syntax that is used throughout dplyr. If you are interested, you can learn more about these peripheral functions in the [dplyr cheatsheet](https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf).
 
 ## Challenges
 
@@ -663,7 +660,7 @@ babynames %>%
 ```
 
 ```{r diversity-3-check}
-"Good job! In recent years, there are fewer girls (on average) given any particular name than boys. This suggests that there is more variety in girls names than boys names once you account for population. Interestingly, the number of children per name has gone down steeply for each gender since the 1960's, even though the total population has continued to increase. This suggests that there is a greater variety of names today than in the past."
+grade_this_code(correct = "Good job! In recent years, there are fewer girls (on average) given any particular name than boys. This suggests that there is more variety in girls names than boys names once you account for population. Interestingly, the number of children per name has gone down steeply for each gender since the 1960's, even though the total population has continued to increase. This suggests that there is a greater variety of names today than in the past.")
 ```
 
 ### Where to from here

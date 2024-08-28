@@ -515,16 +515,17 @@ information.</p>
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
 library(tidyverse)
+library(gradethis)
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
+# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
+#   list(message = check_code, correct = TRUE, location = "append")
+# }
+# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(error = TRUE, out.width = "100%")
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::register_http_handlers(session, metadata = list(id = "com.rstudio.primers.03-histograms", version = 1))
+learnr:::register_http_handlers(session, metadata = list(version = 1))
 </script>
 
 
@@ -565,9 +566,9 @@ output$`tutorial-exercise-hist1-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "hist1", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "hist1", code = "ggplot(data = diamonds) +\n  geom_histogram(mapping = aes(x = carat))", 
@@ -590,7 +591,8 @@ learnr:::store_exercise_cache(structure(list(label = "hist1", global_setup = str
         aniopts = "controls,loop", warning = TRUE, error = TRUE, 
         message = FALSE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "hist1", exercise = TRUE, code = c("ggplot(data = diamonds) +", 
         "  geom_histogram(mapping = aes(x = carat))"), out.width.px = "80%", 
         out.height.px = 384, params.src = "hist1, exercise = TRUE, out.width = \"80%\", message = FALSE", 
@@ -601,20 +603,20 @@ learnr:::store_exercise_cache(structure(list(label = "hist1", global_setup = str
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "r1", question = structure("According to the chart, which is the most common carat size in the data?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_708213f", 
+"character")), answers = list(structure(list(id = "lnr_ans_177fe4f", 
     option = "Approximately 0.3 or 0.4 carats", value = "Approximately 0.3 or 0.4 carats", 
     label = structure("Approximately 0.3 or 0.4 carats", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("More than 15,000 diamonds in the data have a value in the bin near 0.3 and 0.4. That’s more than any other bin. How do we know? because the bar above 0.3 to 0.4 goes to 15,000, higher than any other bar in the plot.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d64c586", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_54eff1f", 
     option = "Approximately 1 carat", value = "Approximately 1 carat", 
     label = structure("Approximately 1 carat", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_3e10028", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_6cfe7d8", 
     option = "Approximately 1.5 carat", value = "Approximately 1.5 carat", 
     label = structure("Approximately 1.5 carat", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_472f589", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_2a2335c", 
     option = "Approximately 2 carats", value = "Approximately 2 carats", 
     label = structure("Approximately 2 carats", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
@@ -625,7 +627,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "r1-answer", question = "r1"), loading = NULL, random_answer_order = FALSE, 
-    allow_retry = TRUE, seed = 1374743748.35984, options = list()), class = c("learnr_radio", 
+    allow_retry = TRUE, seed = 1562351959.27247, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  
@@ -639,9 +641,9 @@ output$`tutorial-exercise-hist2-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "hist2", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "hist2", code = "ggplot(data = diamonds) +\n  geom_histogram(mapping = aes(x = carat), binwidth = 1)", 
@@ -664,7 +666,8 @@ learnr:::store_exercise_cache(structure(list(label = "hist2", global_setup = str
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "hist2", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(data = diamonds) +", "  geom_histogram(mapping = aes(x = carat), binwidth = 1)"
         ), out.width.px = "100%", out.height.px = 384, params.src = "hist2, exercise = TRUE, exercise.eval = TRUE", 
@@ -683,9 +686,9 @@ output$`tutorial-exercise-hist3-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "hist3", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "hist3", code = "ggplot(data = diamonds) +\n  geom_histogram(mapping = aes(x = carat), bins = 10)", 
@@ -708,7 +711,8 @@ learnr:::store_exercise_cache(structure(list(label = "hist3", global_setup = str
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "hist3", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(data = diamonds) +", "  geom_histogram(mapping = aes(x = carat), bins = 10)"
         ), out.width.px = "100%", out.height.px = 384, params.src = "hist3, exercise = TRUE, exercise.eval = TRUE", 
@@ -727,9 +731,9 @@ output$`tutorial-exercise-hist4-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "hist4", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "hist4", code = "ggplot(data = diamonds) +\n  geom_histogram(mapping = aes(x = carat), bins = 10, boundary = 0)", 
@@ -752,7 +756,8 @@ learnr:::store_exercise_cache(structure(list(label = "hist4", global_setup = str
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "hist4", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(data = diamonds) +", "  geom_histogram(mapping = aes(x = carat), bins = 10, boundary = 0)"
         ), out.width.px = "100%", out.height.px = 384, params.src = "hist4, exercise = TRUE, exercise.eval = TRUE", 
@@ -771,14 +776,14 @@ output$`tutorial-exercise-r2-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r2", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "r2", code = "", opts = list(label = "\"r2\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! The most common diamond size is about 0.5 carats. Larger sizes become progressively less frequent as carat size increases. This accords with general knowledge about diamonds, so you may be prompted to stop exploring the distribution of carat size. But should you?\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! The most common diamond size is about 0.5 carats. Larger sizes become progressively less frequent as carat size increases. This accords with general knowledge about diamonds, so you may be prompted to stop exploring the distribution of carat size. But should you?\")", chunk_opts = list(
         label = "r2-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_histogram(mapping = aes(x = carat), binwidth = 0.5)"
     ), chunk_opts = list(label = "r2-solution")), tests = NULL, 
@@ -799,7 +804,8 @@ learnr:::store_exercise_cache(structure(list(label = "r2", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r2", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r2, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -816,14 +822,14 @@ output$`tutorial-exercise-r3-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r3", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "r3", code = "", opts = list(label = "\"r3\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! The new binwidth reveals a new phenomena: carat sizes like 0.5, 0.75, 1, 1.5, and 2 are much more common than carat sizes that do not fall near a common fraction. Why might this be?\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! The new binwidth reveals a new phenomena: carat sizes like 0.5, 0.75, 1, 1.5, and 2 are much more common than carat sizes that do not fall near a common fraction. Why might this be?\")", chunk_opts = list(
         label = "r3-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_histogram(mapping = aes(x = carat), binwidth = 0.1)"
     ), chunk_opts = list(label = "r3-solution")), tests = NULL, 
@@ -844,7 +850,8 @@ learnr:::store_exercise_cache(structure(list(label = "r3", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r3", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r3, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -861,14 +868,14 @@ output$`tutorial-exercise-r4-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r4", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "r4", code = "", opts = list(label = "\"r4\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! The new binwidth reveals another phenomena: each peak is very right skewed. In other words, diamonds that are 1.01 carats are much more common than diamonds that are .99 carats. Why would that be?\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! The new binwidth reveals another phenomena: each peak is very right skewed. In other words, diamonds that are 1.01 carats are much more common than diamonds that are .99 carats. Why would that be?\")", chunk_opts = list(
         label = "r4-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_histogram(mapping = aes(x = carat), binwidth = 0.01, boundary = 0)"
     ), chunk_opts = list(label = "r4-solution")), tests = NULL, 
@@ -889,7 +896,8 @@ learnr:::store_exercise_cache(structure(list(label = "r4", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r4", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r4, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -898,11 +906,11 @@ learnr:::store_exercise_cache(structure(list(label = "r4", global_setup = struct
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "q1", question = structure("Which aesthetic would you use to color the interior fill of each bar in a histogram?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_e2552c5", 
+"character")), answers = list(structure(list(id = "lnr_ans_b9aea37", 
     option = "color", value = "color", label = structure("color", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("For histograms, color controls color of the outline of each bar.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_277b6f4", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_8e07acb", 
     option = "fill", value = "fill", label = structure("fill", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("For geoms with “substance”, like bars, fill controls the color of the interior of the geom. Color controls the outline.", html = TRUE, class = c("html", 
     "character")), type = "literal"), class = c("tutorial_question_answer", 
@@ -913,7 +921,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "q1-answer", question = "q1"), loading = NULL, random_answer_order = FALSE, 
-    allow_retry = TRUE, seed = 300638075.360004, options = list()), class = c("learnr_radio", 
+    allow_retry = TRUE, seed = 906329443.077958, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
 
@@ -927,14 +935,14 @@ output$`tutorial-exercise-r5-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r5", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "r5", code = "", opts = list(label = "\"r5\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! Did you ensure that each binwidth is 1000 and that the first boundary is zero?\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! Did you ensure that each binwidth is 1000 and that the first boundary is zero?\")", chunk_opts = list(
         label = "r5-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_histogram(mapping = aes(x = price, fill = cut), binwidth = 1000, boundary = 0)"
     ), chunk_opts = list(label = "r5-solution")), tests = NULL, 
@@ -955,7 +963,8 @@ learnr:::store_exercise_cache(structure(list(label = "r5", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r5", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r5, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -972,14 +981,14 @@ output$`tutorial-exercise-r6-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r6", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "r6", code = "", opts = list(label = "\"r6\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! By using a line instead of bars, frequency polygons can sometimes do things that histograms cannot.\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! By using a line instead of bars, frequency polygons can sometimes do things that histograms cannot.\")", chunk_opts = list(
         label = "r6-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_freqpoly(mapping = aes(x = carat), binwidth = 0.25, boundary = 0)"
     ), chunk_opts = list(label = "r6-solution")), tests = NULL, 
@@ -1000,7 +1009,8 @@ learnr:::store_exercise_cache(structure(list(label = "r6", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r6", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r6, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1017,14 +1027,14 @@ output$`tutorial-exercise-r7-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r7", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "r7", code = "", opts = list(label = "\"r7\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! Since lines do not occlude each other, `geom_freqpoly()` plots each sub-group against the same baseline: y = 0 (i.e. it unstacks the sub-groups). This makes it easier to compare the distributions. You can now see that for almost every price value, there are more Ideal cut diamonds than there are other types of diamonds.\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! Since lines do not occlude each other, `geom_freqpoly()` plots each sub-group against the same baseline: y = 0 (i.e. it unstacks the sub-groups). This makes it easier to compare the distributions. You can now see that for almost every price value, there are more Ideal cut diamonds than there are other types of diamonds.\")", chunk_opts = list(
         label = "r7-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_freqpoly(mapping = aes(x = price, color = cut), binwidth = 1000, boundary = 0)"
     ), chunk_opts = list(label = "r7-solution")), tests = NULL, 
@@ -1045,7 +1055,8 @@ learnr:::store_exercise_cache(structure(list(label = "r7", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r7", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r7, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1062,14 +1073,14 @@ output$`tutorial-exercise-r8-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r8", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "r8", code = "", opts = list(label = "\"r8\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! You can now compare the most common prices for each sub-group. For example, the plot shows that the most common price for most diamonds is near $1000. However, the most common price for Fair cut diamonds is significantly higher, about $2500. We will come back to this oddity in a later tutorial.\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! You can now compare the most common prices for each sub-group. For example, the plot shows that the most common price for most diamonds is near $1000. However, the most common price for Fair cut diamonds is significantly higher, about $2500. We will come back to this oddity in a later tutorial.\")", chunk_opts = list(
         label = "r8-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_density(mapping = aes(x = price, color = cut))"), chunk_opts = list(
         label = "r8-solution")), tests = NULL, options = list(
@@ -1089,7 +1100,8 @@ learnr:::store_exercise_cache(structure(list(label = "r8", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r8", exercise = TRUE, code = "", out.width.px = "100%", 
         out.height.px = 384, params.src = "r8, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r", 
@@ -1106,9 +1118,9 @@ output$`tutorial-exercise-dotplot-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "dotplot", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "dotplot", code = "ggplot(data = mpg) +\n  geom_dotplot(mapping = aes(x = displ), dotsize = 0.5, stackdir = \"up\", stackratio = 1.1)", 
@@ -1132,7 +1144,8 @@ learnr:::store_exercise_cache(structure(list(label = "dotplot", global_setup = s
         error = TRUE, message = FALSE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "dotplot", exercise = TRUE, exercise.eval = TRUE, 
         code = c("ggplot(data = mpg) +", "  geom_dotplot(mapping = aes(x = displ), dotsize = 0.5, stackdir = \"up\", stackratio = 1.1)"
         ), out.width.px = "100%", out.height.px = 384, params.src = "dotplot, exercise = TRUE, exercise.eval = TRUE, message = FALSE", 
@@ -1151,14 +1164,14 @@ output$`tutorial-exercise-r9-output` <- renderUI({
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "r9", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(gradethis)", "", "# checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
+"#   list(message = check_code, correct = TRUE, location = \"append\")", 
+"# }", "# tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
 "knitr::opts_chunk$set(error = TRUE, out.width = \"100%\")"), chunk_opts = list(
     label = "setup", include = FALSE)), setup = NULL, chunks = list(
     list(label = "r9", code = "ggplot(data = diamonds) +\n  geom_histogram(mapping = aes(x = price, fill = cut), binwidth = 1000, boundary = 0)", 
         opts = list(label = "\"r9\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = structure("\"Good job! Facets make it easier to compare sub-groups, but at the expense of separating the data. You may decide that frequency polygons and densities allow more direct comparisons.\"", chunk_opts = list(
+    code_check = NULL, error_check = NULL, check = structure("grade_this_code(correct = \"Good job! Facets make it easier to compare sub-groups, but at the expense of separating the data. You may decide that frequency polygons and densities allow more direct comparisons.\")", chunk_opts = list(
         label = "r9-check")), solution = structure(c("ggplot(data = diamonds) +", 
     "  geom_histogram(mapping = aes(x = price, fill = cut), binwidth = 1000, boundary = 0) +", 
     "  facet_wrap( ~cut)"), chunk_opts = list(label = "r9-solution")), 
@@ -1179,7 +1192,8 @@ learnr:::store_exercise_cache(structure(list(label = "r9", global_setup = struct
         error = TRUE, message = TRUE, render = NULL, ref.label = NULL, 
         child = NULL, engine = "r", split = FALSE, include = TRUE, 
         purl = TRUE, max.print = 1000, exercise.timelimit = 60, 
-        exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "r9", exercise = TRUE, code = c("ggplot(data = diamonds) +", 
         "  geom_histogram(mapping = aes(x = price, fill = cut), binwidth = 1000, boundary = 0)"
         ), out.width.px = "100%", out.height.px = 384, params.src = "r9, exercise = TRUE", 
@@ -1194,7 +1208,7 @@ learnr:::store_exercise_cache(structure(list(label = "r9", global_setup = struct
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cachem","cellranger","checkmate","cli","colorspace","commonmark","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","forcats","fs","gargle","generics","ggplot2","glue","googledrive","googlesheets4","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","labeling","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","viridisLite","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.4.1","4.1.2","1.0.1","0.4.1","1.0.6","1.1.0","2.1.0","3.6.0","2.0-3","1.9.0","4.1.2","1.5.2","4.1.2","1.1.3","2.2.1","0.6.30","1.1.2","0.3.2","0.18","1.0.4","2.1.1","1.1.0","0.5.2","1.6.3","1.2.1","0.1.3","3.4.0","1.6.2","2.0.0","1.0.1","4.1.2","4.1.2","4.1.2","0.3.1","2.5.1","0.9","1.1.2","0.5.6.1","1.6.2","1.6.15","1.4.4","0.1.4","1.8.4","1.41","0.4.2","1.3.0","0.11.5","1.0.3","1.9.0","2.0.3","1.11","4.1.2","0.12","0.1.10","0.5.0","1.9.0","2.0.3","1.2.0.1","1.0.1","2.5.1","1.0.10","2.1.3","1.4.1","2.0.2","1.1.1","2.18","2.0.3","0.14","1.0.3","0.4.7","1.2.1","1.7.3","4.1.2","1.7.12","1.5.0","3.2.1","1.2.1","1.2.0","1.3.2","0.1.1","4.1.2","0.3.0","1.2.3","4.1.2","0.6.3","0.4.1","2.5.0","0.41","1.3.3","1.8-4","2.3.6"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cachem","cellranger","checkmate","cli","colorspace","commonmark","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","forcats","fs","gargle","generics","ggplot2","glue","googledrive","googlesheets4","gradethis","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","labeling","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","viridisLite","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.5.0","4.1.2","1.0.5","0.4.1","1.0.6","1.1.0","2.1.0","3.6.3","2.1-1","1.9.1","4.1.2","1.5.3","4.1.2","1.2.3","2.2.1","0.6.36","1.1.4","0.3.2","0.24.0","1.0.6","2.1.2","1.2.0","1.0.0","1.6.4","1.2.1","0.1.3","3.4.0","1.7.0","2.0.0","1.0.1","0.2.14","4.1.2","4.1.2","4.1.2","0.3.1","2.5.4","0.9","1.1.3","0.5.6.1","1.6.2","1.6.15","1.4.4","0.1.4","1.8.8","1.41","0.4.3","1.3.0","0.11.5","1.0.4","1.9.0","2.0.3","1.11","4.1.2","0.12","0.1.10","0.5.0","1.9.0","2.0.3","1.2.0.1","1.0.2","2.5.1","1.0.13","2.1.5","1.4.3","2.0.2","1.1.4","2.18","2.0.4","0.16.0","1.0.3","0.4.7","1.2.1","1.7.3","4.1.2","1.8.3","1.5.1","3.2.1","1.3.1","1.2.1","1.3.2","0.1.1","4.1.2","0.4.0","1.2.4","4.1.2","0.6.5","0.4.1","3.0.0","0.41","1.3.3","1.8-4","2.3.6"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>

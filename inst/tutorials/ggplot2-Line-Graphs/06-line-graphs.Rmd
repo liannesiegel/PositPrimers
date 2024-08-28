@@ -16,6 +16,7 @@ library(maps)
 library(mapproj)
 library(gapminder)
 library(forcats)
+library(gradethis)
 
 asia <- 
   gapminder %>% 
@@ -29,10 +30,6 @@ USArrests2 <- USArrests %>%
   rownames_to_column("region") %>% 
   mutate(region = tolower(region))
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(error = TRUE, out.width = "100%")
 ```
 
@@ -102,7 +99,7 @@ ggplot(economics) +
 ```
 
 ```{r r1-check}
-"Good Job! The graph shows the number of unemployed people in the US (in thousands) from 1967 to 2015. Now let's look at a more rich dataset."
+grade_this_code(correct = "Good Job! The graph shows the number of unemployed people in the US (in thousands) from 1967 to 2015. Now let's look at a more rich dataset.")
 ```
 
 ### asia
@@ -147,7 +144,7 @@ ggplot(asia) +
 ```
 
 ```{r r3-check}
-"Good job! There are actually four lines in the plot. One for each country: China, Japan, North Korea, and South Korea."
+grade_this_code(correct = "Good job! There are actually four lines in the plot. One for each country: China, Japan, North Korea, and South Korea.")
 ```
 
 ### group
@@ -167,7 +164,7 @@ ggplot(asia) +
 ```
 
 ```{r r4-check}
-"Good job! We now have a separate line for each country. Unfortunately, we cannot tell what the countries are: the group aesthetic does not supply a legend. Let's look at how to fix that."
+grade_this_code(correct = "Good job! We now have a separate line for each country. Unfortunately, we cannot tell what the countries are: the group aesthetic does not supply a legend. Let's look at how to fix that.")
 ```
 
 ### aesthetics
@@ -196,7 +193,7 @@ ggplot(asia) +
 ```
 
 ```{r r5-check}
-"Good job! If you map two aesthetics to the same variable, ggplot2 will combine their legends. Supplementing color with linetype is a good idea if you might print your line chart in black and white."
+grade_this_code(correct = "Good job! If you map two aesthetics to the same variable, ggplot2 will combine their legends. Supplementing color with linetype is a good idea if you might print your line chart in black and white.")
 ```
 
 ### Exercise 1 - Life Expectancy
@@ -214,7 +211,7 @@ ggplot(asia) +
 ```
 
 ```{r r6-check}
-"Good job! Japan has the highest life expectancy and North Korea the worst, but we can see that things haven't always been this way. Now let's look at some other ways to display the same information."
+grade_this_code(correct = "Good job! Japan has the highest life expectancy and North Korea the worst, but we can see that things haven't always been this way. Now let's look at some other ways to display the same information.")
 ```
 
 ## Similar geoms
@@ -234,7 +231,7 @@ ggplot(asia) +
 ```
 
 ```{r r7-check}
-'Good job! You can control whether the steps move horizontally first and then vertically or vertically first and then horizontally with the parameters `direction = "hv"` (the default) or `direction = "vh"`.'
+grade_this_code(correct = 'Good job! You can control whether the steps move horizontally first and then vertically or vertically first and then horizontally with the parameters `direction = "hv"` (the default) or `direction = "vh"`.')
 ```
 
 ### geom_area()
@@ -252,7 +249,7 @@ ggplot(economics) +
 ```
 
 ```{r r0-check}
-"Good job! Filling the space under the line gives you a new way to customize your plot."
+grade_this_code(correct = "Good job! Filling the space under the line gives you a new way to customize your plot.")
 ```
 
 
@@ -271,7 +268,7 @@ ggplot(economics) +
 ```
 
 ```{r r8-check}
-"Good job! Remember that you map aesthetics to variables inside of aes(). You set aesthetics to values outside of aes()."
+grade_this_code(correct = "Good job! Remember that you map aesthetics to variables inside of aes(). You set aesthetics to values outside of aes().")
 ```
 
 ### Accumulation
@@ -304,7 +301,7 @@ ggplot(asia) +
 ```
 
 ```{r r9-check}
-"Good Job! You can further customize your graph by switching from `geom_area()` to `geom_ribbon()`. `geom_ribbon()` lets you map the bottom of the filled area to a variable, as well as the top. See `?geom_ribbon` if you'd like to learn more."
+grade_this_code(correct = "Good Job! You can further customize your graph by switching from `geom_area()` to `geom_ribbon()`. `geom_ribbon()` lets you map the bottom of the filled area to a variable, as well as the top. See `?geom_ribbon` if you'd like to learn more.")
 ```
 
 ### geom_path()
@@ -360,7 +357,7 @@ ggplot(tx) +
 ```
 
 ```{r r10-check}
-"Good job! `geom_path()` reveals how you can use what is essentially a line plot to make a map (this is a map of the state of Texas). There are other ways to make maps in R, but this low tech method is surprisingly versatile."
+grade_this_code(correct = "Good job! `geom_path()` reveals how you can use what is essentially a line plot to make a map (this is a map of the state of Texas). There are other ways to make maps in R, but this low tech method is surprisingly versatile.")
 ```
 
 ### geom_polygon()
@@ -428,7 +425,7 @@ ggplot(id) +
 ```
 
 ```{r r12-check}
-"Good job! This is how I collected the tx dataset. Let's look at what would happen if you do not specify a region in map_data()."
+grade_this_code(correct = "Good job! This is how I collected the tx dataset. Let's look at what would happen if you do not specify a region in map_data().")
 ```
 
 ### state
@@ -472,7 +469,7 @@ ggplot(us) +
 ```
 
 ```{r r13-check}
-"Good job! You've mastered a method for drawing maps. Let's take the final step and use the map to display information."
+grade_this_code(correct = "Good job! You've mastered a method for drawing maps. Let's take the final step and use the map to display information.")
 ```
 
 ### USArrests
@@ -520,7 +517,7 @@ ggplot(USArrests2) +
 ```
 
 ```{r r15-check}
-"Congratulations! You've used geom_map() to make your first choropleth plot! To test your understanding, alter the code to display the Murder, Assault, or Rape variables."
+grade_this_code(correct = "Congratulations! You've used geom_map() to make your first choropleth plot! To test your understanding, alter the code to display the Murder, Assault, or Rape variables.")
 ```
 
 ### coord_map()
@@ -556,7 +553,7 @@ ggplot(USArrests2) +
 ```
 
 ```{r r16-check}
-"Good job! To see a list of available projections, visit the `?mapproj` help page, which is hyperlinked from the coord_map() help page."
+grade_this_code(correct = "Good job! To see a list of available projections, visit the `?mapproj` help page, which is hyperlinked from the coord_map() help page.")
 ```
 
 

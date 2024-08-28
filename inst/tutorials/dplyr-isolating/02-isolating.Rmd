@@ -14,11 +14,8 @@ runtime: shiny_prerendered
 library(learnr)
 library(tidyverse)
 library(babynames)
+library(gradethis)
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -235,7 +232,7 @@ filter(babynames, name == "Sea")
 ```
 
 ```{r filter-1a-check}
-"Good Job! Remember to use == instead of = when testing for equality."
+grade_this_code(correct = "Good Job! Remember to use == instead of = when testing for equality.")
 ```
 
 ```{r eval = FALSE, echo = TRUE}
@@ -251,7 +248,7 @@ filter(babynames, name == "Sea")
 ```
 
 ```{r filter-1b-check}
-"Good Job! As written this code would check that name is equal to the contents of the object named Sea, which does not exist."
+grade_this_code(correct = "Good Job! As written this code would check that name is equal to the contents of the object named Sea, which does not exist.")
 ```
 
 ### Two mistakes - Recap
@@ -320,7 +317,7 @@ filter(babynames, 10 < n, n < 20)
 ```
 
 ```{r filter-3-check}
-"Good job! You cannot combine two logical tests in R without using a Boolean operator (or at least a comma between filter arguments)."
+grade_this_code(correct = "Good job! You cannot combine two logical tests in R without using a Boolean operator (or at least a comma between filter arguments).")
 ```
 
 ```{r eval = FALSE, echo = TRUE}
@@ -336,7 +333,7 @@ filter(babynames, n %in% c(5, 6, 7, 8, 9))
 ```
 
 ```{r filter-4-check}
-"Good job! Although the first code works, you should make your code more concise by collapsing multiple or statements into an %in% statement when possible."
+grade_this_code(correct = "Good job! Although the first code works, you should make your code more concise by collapsing multiple or statements into an %in% statement when possible.")
 ```
 
 ### Two more common mistakes - Recap
@@ -364,7 +361,7 @@ arrange(babynames, n)
 ```
 
 ```{r arrange-1-check}
-"Good job! The compiler of `babynames` used 5 as a cutoff; a name only made it into babynames for a given year and gender if it was used for five or more children."
+grade_this_code(correct = "Good job! The compiler of `babynames` used 5 as a cutoff; a name only made it into babynames for a given year and gender if it was used for five or more children.")
 ```
 
 ### Tie breakers
@@ -420,7 +417,7 @@ arrange(babynames, desc(n))
 ```
 
 ```{r arrange-5-check}
-"The number of children represented by each proportion grew over time as the population grew."
+grade_this_code(correct = "The number of children represented by each proportion grew over time as the population grew.")
 ```
 
 ## %>%

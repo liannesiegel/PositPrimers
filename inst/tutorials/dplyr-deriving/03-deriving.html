@@ -905,7 +905,7 @@ with several functions that are variations on the themes of
 and <code>mutate()</code>. Each follows the same pipeable syntax that is
 used throughout dplyr. If you are interested, you can learn more about
 these peripheral functions in the <a
-href="https://github.com/rstudio/cheatsheets/raw/master/source/pdfs/data-transformation-cheatsheet.pdf">dplyr
+href="https://nyu-cdsc.github.io/learningr/assets/data-transformation.pdf">dplyr
 cheatsheet</a>.</p>
 </div>
 </div>
@@ -1067,6 +1067,7 @@ working with R:</p>
 library(learnr)
 library(tidyverse)
 library(babynames)
+library(gradethis)
 
 tops <- babynames::babynames %>% 
   group_by(name, sex) %>% 
@@ -1085,10 +1086,6 @@ number_ones <- babynames::babynames %>%
   distinct(name) %>% 
   .$name
 
-checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {
-  list(message = check_code, correct = TRUE, location = "append")
-}
-tutorial_options(exercise.timelimit = 60, exercise.checker = checker)
 knitr::opts_chunk$set(echo = FALSE)
 </script>
  
@@ -1127,12 +1124,12 @@ tryCatch(
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "q1", question = structure("Do we have enough information in <code>babynames<\u002fcode> to compare the popularity of names?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_218382a", 
+"character")), answers = list(structure(list(id = "lnr_ans_cc2312d", 
     option = "No. No cell in `babynames` contains a rank value or a sum across years.", 
     value = "No. No cell in `babynames` contains a rank value or a sum across years.", 
     label = structure("No. No cell in <code>babynames<\u002fcode> contains a rank value or a sum across years.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_ad23b4d", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_812fdfb", 
     option = "Yes. We can use the information in `babynames` to compute the values we want.", 
     value = "Yes. We can use the information in `babynames` to compute the values we want.", 
     label = structure("Yes. We can use the information in <code>babynames<\u002fcode> to compute the values we want.", html = TRUE, class = c("html", 
@@ -1144,7 +1141,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "q1-answer", question = "q1"), loading = NULL, random_answer_order = FALSE, 
-    allow_retry = TRUE, seed = 230961805.39245, options = list()), class = c("learnr_radio", 
+    allow_retry = TRUE, seed = 571180753.234023, options = list()), class = c("learnr_radio", 
 "tutorial_question")), session = session)
 </script>
  
@@ -1158,15 +1155,13 @@ output$`tutorial-exercise-summarise-1-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "summarise-1", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1193,7 +1188,8 @@ learnr:::store_exercise_cache(structure(list(label = "summarise-1", global_setup
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "summarise-1", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "summarise-1, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1210,15 +1206,13 @@ output$`tutorial-exercise-khaleesi-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "khaleesi", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1244,7 +1238,8 @@ learnr:::store_exercise_cache(structure(list(label = "khaleesi", global_setup = 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "khaleesi", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "khaleesi, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1261,15 +1256,13 @@ output$`tutorial-exercise-distinct-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "distinct", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1277,7 +1270,7 @@ learnr:::store_exercise_cache(structure(list(label = "distinct", global_setup = 
         engine = "r"), list(label = "distinct", code = "", opts = list(
         label = "\"distinct\"", exercise = "TRUE", exercise.setup = "\"bnames\""), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! The two numbers are different because most names appear in the data set more than once. They appear once for each year in which they were used.\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! The two numbers are different because most names appear in the data set more than once. They appear once for each year in which they were used.\")", chunk_opts = list(
         label = "distinct-check")), solution = structure(c("babynames %>% ", 
     "  summarise(n = n(), distinct = n_distinct(name))"), chunk_opts = list(
         label = "distinct-solution")), tests = NULL, options = list(
@@ -1296,7 +1289,8 @@ learnr:::store_exercise_cache(structure(list(label = "distinct", global_setup = 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "distinct", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "distinct, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1313,15 +1307,13 @@ output$`tutorial-exercise-grouping-1-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "grouping-1", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = NULL, chunks = list(list(label = "grouping-1", 
     code = "babynames %>%\n  group_by(year, sex) %>% \n  summarise(total = sum(n))", 
@@ -1344,7 +1336,8 @@ learnr:::store_exercise_cache(structure(list(label = "grouping-1", global_setup 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "grouping-1", exercise = TRUE, exercise.eval = TRUE, 
         code = c("babynames %>%", "  group_by(year, sex) %>% ", 
         "  summarise(total = sum(n))"), out.width.px = 624, out.height.px = 384, 
@@ -1364,15 +1357,13 @@ output$`tutorial-exercise-popular-1-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "popular-1", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1399,7 +1390,8 @@ learnr:::store_exercise_cache(structure(list(label = "popular-1", global_setup =
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "popular-1", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "popular-1, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1416,15 +1408,13 @@ output$`tutorial-exercise-popular-2-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "popular-2", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1450,7 +1440,8 @@ learnr:::store_exercise_cache(structure(list(label = "popular-2", global_setup =
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "popular-2", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "popular-2, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1467,15 +1458,13 @@ output$`tutorial-exercise-popular-3-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "popular-3", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1483,7 +1472,7 @@ learnr:::store_exercise_cache(structure(list(label = "popular-3", global_setup =
         engine = "r"), list(label = "popular-3", code = "", opts = list(
         label = "\"popular-3\"", exercise = "TRUE", exercise.setup = "\"bnames\""), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Good job! This graph shows different trends than the one above, now let's consider why.\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Good job! This graph shows different trends than the one above, now let's consider why.\")", chunk_opts = list(
         label = "popular-3-check")), solution = structure(c("top_10 %>%", 
     "  ggplot() +", "    geom_line(aes(x = year, y = n, color = name))"
     ), chunk_opts = list(label = "popular-3-solution")), tests = NULL, 
@@ -1503,7 +1492,8 @@ learnr:::store_exercise_cache(structure(list(label = "popular-3", global_setup =
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "popular-3", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "popular-3, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1520,15 +1510,13 @@ output$`tutorial-exercise-population-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "population", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1555,7 +1543,8 @@ learnr:::store_exercise_cache(structure(list(label = "population", global_setup 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "population", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "population, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1572,15 +1561,13 @@ output$`tutorial-exercise-mutate-1-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "mutate-1", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1606,7 +1593,8 @@ learnr:::store_exercise_cache(structure(list(label = "mutate-1", global_setup = 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "mutate-1", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "mutate-1, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1623,15 +1611,13 @@ output$`tutorial-exercise-mutate-2-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "mutate-2", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1657,7 +1643,8 @@ learnr:::store_exercise_cache(structure(list(label = "mutate-2", global_setup = 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "mutate-2", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "mutate-2, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1674,15 +1661,13 @@ output$`tutorial-exercise-mutate-3-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "mutate-3", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1709,7 +1694,8 @@ learnr:::store_exercise_cache(structure(list(label = "mutate-3", global_setup = 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "mutate-3", exercise = TRUE, exercise.setup = "bnames", 
         code = c("babynames %>% ", "  mutate(rank = min_rank(desc(prop)))"
         ), out.width.px = 624, out.height.px = 384, params.src = "mutate-3, exercise = TRUE, exercise.setup = \"bnames\"", 
@@ -1727,15 +1713,13 @@ output$`tutorial-exercise-mutate-4-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "mutate-4", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1743,7 +1727,7 @@ learnr:::store_exercise_cache(structure(list(label = "mutate-4", global_setup = 
         engine = "r"), list(label = "mutate-4", code = "", opts = list(
         label = "\"mutate-4\"", exercise = "TRUE", exercise.setup = "\"bnames\""), 
         engine = "r")), code_check = NULL, error_check = NULL, 
-    check = structure("\"Congratulations! Our second provides a different picture of popularity. Here we see names that have been consistently popular over time, including new entries like Elizabeth and Thomas.\"", chunk_opts = list(
+    check = structure("grade_this_code(correct = \"Congratulations! Our second provides a different picture of popularity. Here we see names that have been consistently popular over time, including new entries like Elizabeth and Thomas.\")", chunk_opts = list(
         label = "mutate-4-check")), solution = structure(c("babynames %>% ", 
     "  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(prop))) %>% ", 
     "  group_by(name, sex) %>% ", "  summarise(score = median(rank)) %>% ", 
@@ -1764,7 +1748,8 @@ learnr:::store_exercise_cache(structure(list(label = "mutate-4", global_setup = 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "mutate-4", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "mutate-4, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1781,15 +1766,13 @@ output$`tutorial-exercise-ones-1-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "ones-1", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1817,7 +1800,8 @@ learnr:::store_exercise_cache(structure(list(label = "ones-1", global_setup = st
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "ones-1", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "ones-1, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1834,15 +1818,13 @@ output$`tutorial-exercise-ones-2-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "ones-2", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1870,7 +1852,8 @@ learnr:::store_exercise_cache(structure(list(label = "ones-2", global_setup = st
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "ones-2", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "ones-2, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1887,15 +1870,13 @@ output$`tutorial-exercise-diversity-1-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "diversity-1", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1923,7 +1904,8 @@ learnr:::store_exercise_cache(structure(list(label = "diversity-1", global_setup
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "diversity-1", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "diversity-1, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1940,15 +1922,13 @@ output$`tutorial-exercise-diversity-2-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "diversity-2", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -1976,7 +1956,8 @@ learnr:::store_exercise_cache(structure(list(label = "diversity-2", global_setup
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "diversity-2", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "diversity-2, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -1993,15 +1974,13 @@ output$`tutorial-exercise-diversity-3-output` <- renderUI({
 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache(structure(list(label = "diversity-3", global_setup = structure(c("library(learnr)", 
-"library(tidyverse)", "library(babynames)", "", "tops <- babynames::babynames %>% ", 
-"  group_by(name, sex) %>% ", "  summarise(total = sum(n)) %>% ", 
-"  ungroup() %>% ", "  top_n(10, total)", "  ", "top_10 <- babynames::babynames %>% ", 
-"  semi_join(tops, by = c(\"name\", \"sex\"))", "", "number_ones <- babynames::babynames %>% ", 
-"  group_by(year, sex) %>% ", "  mutate(rank = min_rank(desc(n))) %>% ", 
-"  filter(rank == 1, sex == \"M\") %>% ", "  ungroup() %>% ", 
-"  distinct(name) %>% ", "  .$name", "", "checker <- function(label, user_code, check_code, envir_result, evaluate_result, ...) {", 
-"  list(message = check_code, correct = TRUE, location = \"append\")", 
-"}", "tutorial_options(exercise.timelimit = 60, exercise.checker = checker)", 
+"library(tidyverse)", "library(babynames)", "library(gradethis)", 
+"", "tops <- babynames::babynames %>% ", "  group_by(name, sex) %>% ", 
+"  summarise(total = sum(n)) %>% ", "  ungroup() %>% ", "  top_n(10, total)", 
+"  ", "top_10 <- babynames::babynames %>% ", "  semi_join(tops, by = c(\"name\", \"sex\"))", 
+"", "number_ones <- babynames::babynames %>% ", "  group_by(year, sex) %>% ", 
+"  mutate(rank = min_rank(desc(n))) %>% ", "  filter(rank == 1, sex == \"M\") %>% ", 
+"  ungroup() %>% ", "  distinct(name) %>% ", "  .$name", "", 
 "knitr::opts_chunk$set(echo = FALSE)"), chunk_opts = list(label = "setup", 
     include = FALSE)), setup = "library(babynames)", chunks = list(
     list(label = "bnames", code = "library(babynames)", opts = list(
@@ -2009,7 +1988,7 @@ learnr:::store_exercise_cache(structure(list(label = "diversity-3", global_setup
         engine = "r"), list(label = "diversity-3", code = "", 
         opts = list(label = "\"diversity-3\"", exercise = "TRUE", 
             exercise.setup = "\"bnames\""), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = structure("\"Good job! In recent years, there are fewer girls (on average) given any particular name than boys. This suggests that there is more variety in girls names than boys names once you account for population. Interestingly, the number of children per name has gone down steeply for each gender since the 1960's, even though the total population has continued to increase. This suggests that there is a greater variety of names today than in the past.\"", chunk_opts = list(
+    error_check = NULL, check = structure("grade_this_code(correct = \"Good job! In recent years, there are fewer girls (on average) given any particular name than boys. This suggests that there is more variety in girls names than boys names once you account for population. Interestingly, the number of children per name has gone down steeply for each gender since the 1960's, even though the total population has continued to increase. This suggests that there is a greater variety of names today than in the past.\")", chunk_opts = list(
         label = "diversity-3-check")), solution = structure(c("babynames %>% ", 
     "  group_by(year, sex) %>% ", "  summarise(per_name = mean(n)) %>% ", 
     "  ggplot() +", "    geom_line(aes(x = year, y = per_name, color = sex))"
@@ -2030,7 +2009,8 @@ learnr:::store_exercise_cache(structure(list(label = "diversity-3", global_setup
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label, user_code, check_code, envir_result, evaluate_result, \n    ...) \n{\n    list(message = check_code, correct = TRUE, location = \"append\")\n}", 
+        max.print = 1000, exercise.timelimit = 60, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, stage = NULL, ..., \n    solution_eval_fn = NULL) \n{\n    (utils::getFromNamespace(\"check_exercise\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, stage = stage, ...)\n}", 
+        exercise.error.check.code = "gradethis_error_checker()", 
         label = "diversity-3", exercise = TRUE, exercise.setup = "bnames", 
         code = "", out.width.px = 624, out.height.px = 384, params.src = "diversity-3, exercise = TRUE, exercise.setup = \"bnames\"", 
         fig.num = 0L, exercise.df_print = "default"), engine = "r", 
@@ -2044,7 +2024,7 @@ learnr:::store_exercise_cache(structure(list(label = "diversity-3", global_setup
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92]}},"value":[{"type":"character","attributes":{},"value":["assertthat","babynames","backports","base","broom","bslib","cachem","cellranger","checkmate","cli","colorspace","commonmark","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","forcats","fs","gargle","generics","ggplot2","glue","googledrive","googlesheets4","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","labeling","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.0.1","1.4.1","4.1.2","1.0.5","0.4.1","1.0.6","1.1.0","2.1.0","3.6.2","2.0-3","1.9.0","4.1.2","1.5.2","4.1.2","1.1.3","2.2.1","0.6.35","1.1.4","0.3.2","0.23","1.0.6","2.1.1","1.1.0","1.0.0","1.6.3","1.2.1","0.1.3","3.4.0","1.7.0","2.0.0","1.0.1","4.1.2","4.1.2","4.1.2","0.3.1","2.5.4","0.9","1.1.3","0.5.6.1","1.6.2","1.6.15","1.4.4","0.1.4","1.8.8","1.41","0.4.2","1.3.0","0.11.5","1.0.4","1.9.0","2.0.3","1.11","4.1.2","0.12","0.1.10","0.5.0","1.9.0","2.0.3","1.2.0.1","1.0.2","2.5.1","1.0.12","2.1.5","1.4.1","2.0.2","1.1.3","2.18","2.0.4","0.14","1.0.3","0.4.7","1.2.1","1.7.3","4.1.2","1.8.3","1.5.1","3.2.1","1.3.1","1.2.1","1.3.2","0.1.1","4.1.2","0.4.0","1.2.4","4.1.2","0.6.5","3.0.0","0.41","1.3.3","1.8-4","2.3.6"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93]}},"value":[{"type":"character","attributes":{},"value":["assertthat","babynames","backports","base","broom","bslib","cachem","cellranger","checkmate","cli","colorspace","commonmark","compiler","crayon","datasets","DBI","dbplyr","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","forcats","fs","gargle","generics","ggplot2","glue","googledrive","googlesheets4","gradethis","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","labeling","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.0.1","1.5.0","4.1.2","1.0.5","0.4.1","1.0.6","1.1.0","2.1.0","3.6.3","2.1-1","1.9.1","4.1.2","1.5.3","4.1.2","1.2.3","2.2.1","0.6.36","1.1.4","0.3.2","0.24.0","1.0.6","2.1.2","1.2.0","1.0.0","1.6.4","1.2.1","0.1.3","3.4.0","1.7.0","2.0.0","1.0.1","0.2.14","4.1.2","4.1.2","4.1.2","0.3.1","2.5.4","0.9","1.1.3","0.5.6.1","1.6.2","1.6.15","1.4.4","0.1.4","1.8.8","1.41","0.4.3","1.3.0","0.11.5","1.0.4","1.9.0","2.0.3","1.11","4.1.2","0.12","0.1.10","0.5.0","1.9.0","2.0.3","1.2.0.1","1.0.2","2.5.1","1.0.13","2.1.5","1.4.3","2.0.2","1.1.4","2.18","2.0.4","0.16.0","1.0.3","0.4.7","1.2.1","1.7.3","4.1.2","1.8.3","1.5.1","3.2.1","1.3.1","1.2.1","1.3.2","0.1.1","4.1.2","0.4.0","1.2.4","4.1.2","0.6.5","3.0.0","0.41","1.3.3","1.8-4","2.3.6"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>
