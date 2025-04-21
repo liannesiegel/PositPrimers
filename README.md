@@ -41,9 +41,7 @@ First install and load the following packages:
 <ol>
 <li>tidyverse</li> 
 <li>devtools</li>
-<li>devtools</li>
 <li>learnr</li>  
-<li>esquisse</li>
 </ol>
 
 Install and load the gradethis package using the following code to install: 
