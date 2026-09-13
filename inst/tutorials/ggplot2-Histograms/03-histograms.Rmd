@@ -58,7 +58,7 @@ The tutorial uses the ggplot2 and dplyr packages, which have been pre-loaded for
 
 ### Introduction
 
-![](https://vimeo.com/221607341)
+Histograms are similar bar charts, but show the distribution of a continuous variable rather than a categorical one. 
 
 ### How to make a histogram
 

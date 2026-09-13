@@ -55,7 +55,7 @@ The tutorial uses the ggplot2 and dplyr packages, which have been pre-loaded for
 
 ### Introduction
 
-![](https://vimeo.com/222358034)
+Boxplots display the distribution of a continuous variable, and in particular, are a useful way of comparing the distribution of a continuous variable across several categorical subgroups. They display the median, interquartile range (IQR; i.e., the 25th percentile and the 75th percentile), and the minumum/maximum. If the minimum and maximum are wider than some pre-specified rule (e.g., 1.5 times the standard deviation), additional data points are represented as dots. 
 
 ### Exercise 1 - Boxplots
 
