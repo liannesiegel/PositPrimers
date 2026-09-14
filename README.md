@@ -1,4 +1,6 @@
-This package adapts the primers originally created by Posit for educational use. The package includes modules that primarily encapsulate an introduction to "ggplot2", "dplyr". The code was adapted from that developed by Posit (https://github.com/rstudio-education/primers) though some components may have changed. 
+This package adapts the primers originally created by Posit for educational use. These original primers were developed by the RStudio/Posit Education Team and made open source on GitHub. Following the original license, these tutorials are licensed under the Creative Commons Attribution-ShareAlike 4.0 License (CC BY-SA 4.0). The primers are derived from the book R for Data Science from O’Reilly Media, Inc. Copyright © 2017 Garrett Grolemund, Hadley Wickham. Used with permission.
+
+The package includes modules that primarily encapsulate an introduction to "ggplot2", "dplyr". The code was adapted from that developed by Posit (https://github.com/rstudio-education/primers) though some components may have changed. Most notably, several tutorials have been modified to remove embedded videos that are no longer available. 
 
 This contains the following tutorials: 
 
